@@ -116,7 +116,7 @@ export default function Home() {
 
       <main className="page">
         <section className="profile">
-          <div className="avatar">SUA FOTO AQUI</div>
+          <div className="avatar"><img src="/profile.jpg" alt="Guilherme de Morais" /></div>
           <h1>GUILHERME DE MORAIS</h1>
           <p className="role">Software Engineer · Systems · Security · Automation</p>
           <p className="bio">Construindo sistemas, automações e produtos digitais que resolvem problemas reais.</p>
