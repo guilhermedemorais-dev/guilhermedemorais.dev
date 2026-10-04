@@ -1,37 +1,31 @@
 export const projects = [
   {
-    title: "Orion ERP",
-    description: "ERP modular para operação comercial, estoque, PDV e automações.",
+    title: "ORION CRM / ERP",
+    description: "Sistema empresarial para clientes, estoque, vendas, PDV, financeiro e automações.",
     tag: "ERP",
   },
   {
-    title: "Engineering Harness",
-    description: "Governança e automação do fluxo de desenvolvimento.",
-    tag: "DEV",
+    title: "HabilitFy",
+    description: "Plataforma SaaS para autoescolas e instrutores. Desenvolvimento pausado temporariamente, com retomada planejada.",
+    tag: "SaaS",
   },
   {
     title: "PIRCSEEK",
-    description: "Busca e inteligência sobre repositórios e superfícies técnicas.",
-    tag: "SEC",
+    description: "Pesquisa experimental sobre recuperação de contexto, busca híbrida e eficiência de sistemas baseados em LLMs.",
+    tag: "AI",
+  },
+  {
+    title: "Engineering Harness",
+    description: "Governança e automação do fluxo de engenharia com agentes, validação e segurança.",
+    tag: "DEV",
   },
 ];
 
-export const products = [
-  {
-    title: "Orion ERP",
-    description: "Base completa para gestão comercial, estoque, clientes e PDV.",
-    tag: "ERP",
-  },
-  {
-    title: "CRM + WhatsApp",
-    description: "Pipeline, leads e automações de atendimento.",
-    tag: "CRM",
-  },
-];
+export const products = [] as const;
 
 export const services = [
-  ["Software Engineering", "Aplicações web, sistemas internos, SaaS, APIs e integrações."],
-  ["Cybersecurity", "Segurança aplicada à arquitetura, infraestrutura e desenvolvimento."],
-  ["Automation", "Fluxos, agentes, n8n, integrações e redução de trabalho manual."],
-  ["Infrastructure", "Docker, Linux, VPS, CI/CD, observabilidade e deploy."],
+  ["Solutions Architecture", "Entendimento do problema, desenho da solução, arquitetura, integrações e decisões técnicas."],
+  ["Software Engineering", "Sistemas, aplicações web, APIs, plataformas e produtos digitais de ponta a ponta."],
+  ["Security", "Segurança de aplicações, desenvolvimento seguro e evolução profissional em cibersegurança."],
+  ["Artificial Intelligence", "IA aplicada a produtos, agentes, automações, pesquisa e engenharia de software."],
 ] as const;
