@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
-import { journey, products, projects, services } from "@/data/site";
+import { journey, projects, services } from "@/data/site";
 
 type Panel = "sobre" | "portfolio" | "servicos" | "blog" | "loja" | "setup" | "videos" | "sdr" | "cartao";
 type Message = { role: "user" | "assistant"; content: string };
@@ -312,7 +312,7 @@ export default function Home() {
               <div className="panel enter">
                 <div className="eyebrow">05 · Loja de software</div><h2>Em preparação.</h2>
                 <p className="lead">A seleção de produtos comerciais ainda está sendo definida. Os projetos open source que entrarem aqui serão adaptados, reestruturados e apresentados com identidade própria antes da comercialização.</p>
-                {products.length > 0 && <div className="list">{products.map((item) => <article className="row" key={item.title}><div className="thumb">{item.tag}</div><div><strong>{item.title}</strong><p>{item.description}</p></div><span className="arrow">→</span></article>)}</div>}
+                <div className="emptyState">Catálogo comercial ainda não publicado.</div>
               </div>
             )}
 
