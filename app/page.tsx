@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
-import { products, projects, services } from "@/data/site";
+import { journey, products, projects, services } from "@/data/site";
 
 type Panel = "sobre" | "portfolio" | "servicos" | "blog" | "loja" | "setup" | "videos" | "sdr" | "cartao";
 type Message = { role: "user" | "assistant"; content: string };
@@ -19,31 +19,53 @@ const menu: { id: Panel; label: string }[] = [
   { id: "cartao", label: "Cartão" },
 ];
 
+const projectMeta: Record<string,{status:string;kind:string;url:string;cover:string}> = {
+  "ORION CRM / ERP": {
+    status: "EM DESENVOLVIMENTO",
+    kind: "Produto / cliente",
+    url: "https://github.com/guilhermedemorais-dev/ORION-CRM",
+    cover: "https://opengraph.githubassets.com/portfolio-orion/guilhermedemorais-dev/ORION-CRM"
+  },
+  "HabilitFy": {
+    status: "PAUSADO · RETOMADA PLANEJADA",
+    kind: "Startup própria",
+    url: "https://github.com/guilhermedemorais-dev/Habilitfy",
+    cover: "https://opengraph.githubassets.com/portfolio-habilitfy/guilhermedemorais-dev/Habilitfy"
+  },
+  "PIRCSEEK": {
+    status: "PESQUISA",
+    kind: "Research",
+    url: "https://github.com/guilhermedemorais-dev/PIRCSEEK",
+    cover: "https://opengraph.githubassets.com/portfolio-pircseek/guilhermedemorais-dev/PIRCSEEK"
+  },
+  "Engineering Harness": {
+    status: "EM EVOLUÇÃO",
+    kind: "Developer tooling",
+    url: "https://github.com/guilhermedemorais-dev/Dev-workflow",
+    cover: "https://opengraph.githubassets.com/portfolio-harness/guilhermedemorais-dev/Dev-workflow"
+  }
+};
+
 const bootLines = [
   "> INIT GUILHERME.DEV",
   "loading kernel...",
   "mounting portfolio...",
   "loading systems........ OK",
   "loading security....... OK",
-  "loading automation..... OK",
   "loading ai modules..... OK",
   "starting interface...",
-  "01001001 01101110 01101001 01110100",
-  "usr/bin/dev",
-  "module.systems",
+  "module.architecture",
   "module.security",
   "module.ai",
   "[####################] 100%",
   "> READY",
 ];
 
-function SocialIcon({ kind }: { kind: "github" | "linkedin" | "instagram" | "youtube" | "tiktok" }) {
+function SocialIcon({ kind }: { kind: "github" | "linkedin" | "instagram" }) {
   const common = { viewBox: "0 0 24 24", width: 14, height: 14, fill: "currentColor", "aria-hidden": true } as const;
   if (kind === "github") return <svg {...common}><path d="M12 .7A11.3 11.3 0 0 0 8.43 22.72c.57.1.78-.25.78-.55v-2.15c-3.19.69-3.86-1.35-3.86-1.35-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.67 1.25 3.32.96.1-.74.4-1.25.73-1.54-2.55-.29-5.23-1.27-5.23-5.66 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.46.11-3.03 0 0 .96-.31 3.14 1.17a10.9 10.9 0 0 1 5.72 0c2.18-1.48 3.14-1.17 3.14-1.17.62 1.57.23 2.74.11 3.03.73.8 1.18 1.82 1.18 3.07 0 4.4-2.69 5.37-5.25 5.65.41.35.78 1.05.78 2.12v3.15c0 .3.21.66.79.55A11.3 11.3 0 0 0 12 .7Z" /></svg>;
   if (kind === "linkedin") return <svg {...common}><path d="M5.2 3.4A2.2 2.2 0 1 1 .8 3.4a2.2 2.2 0 0 1 4.4 0ZM1.2 7h4v13.8h-4V7Zm6.5 0h3.8v1.9h.1c.5-1 1.9-2.4 4.3-2.4 4.6 0 5.4 3 5.4 6.9v7.4h-4v-6.6c0-1.6 0-3.6-2.2-3.6s-2.6 1.7-2.6 3.5v6.7h-4V7Z" /></svg>;
-  if (kind === "instagram") return <svg {...common}><path d="M7.3 2h9.4A5.3 5.3 0 0 1 22 7.3v9.4a5.3 5.3 0 0 1-5.3 5.3H7.3A5.3 5.3 0 0 1 2 16.7V7.3A5.3 5.3 0 0 1 7.3 2Zm0 1.9a3.4 3.4 0 0 0-3.4 3.4v9.4a3.4 3.4 0 0 0 3.4 3.4h9.4a3.4 3.4 0 0 0 3.4-3.4V7.3a3.4 3.4 0 0 0-3.4-3.4H7.3Zm9.9 1.4a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.9a3.1 3.1 0 1 0 0 6.2 3.1 3.1 0 0 0 0-6.2Z" /></svg>;
-  if (kind === "youtube") return <svg {...common}><path d="M23 12s0-3.5-.45-5.2a3 3 0 0 0-2.1-2.1C18.75 4.2 12 4.2 12 4.2s-6.75 0-8.45.5a3 3 0 0 0-2.1 2.1C1 8.5 1 12 1 12s0 3.5.45 5.2a3 3 0 0 0 2.1 2.1c1.7.5 8.45.5 8.45.5s6.75 0 8.45-.5a3 3 0 0 0 2.1-2.1C23 15.5 23 12 23 12Zm-13 3.4V8.6l6 3.4-6 3.4Z" /></svg>;
-  return <svg {...common}><path d="M14.4 2h3.2c.3 2 1.5 3.5 3.4 4v3.2c-1.3 0-2.5-.3-3.4-.9v6.3a6.6 6.6 0 1 1-5.7-6.5v3.3a3.4 3.4 0 1 0 2.5 3.2V2Z" /></svg>;
+  return <svg {...common}><path d="M7.3 2h9.4A5.3 5.3 0 0 1 22 7.3v9.4a5.3 5.3 0 0 1-5.3 5.3H7.3A5.3 5.3 0 0 1 2 16.7V7.3A5.3 5.3 0 0 1 7.3 2Zm0 1.9a3.4 3.4 0 0 0-3.4 3.4v9.4a3.4 3.4 0 0 0 3.4 3.4h9.4a3.4 3.4 0 0 0 3.4-3.4V7.3a3.4 3.4 0 0 0-3.4-3.4H7.3Zm9.9 1.4a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.9a3.1 3.1 0 1 0 0 6.2 3.1 3.1 0 0 0 0-6.2Z" /></svg>;
 }
 
 export default function Home() {
@@ -59,23 +81,22 @@ export default function Home() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [progress, setProgress] = useState(0);
-  const [typeWord, setTypeWord] = useState("Systems");
+  const [typeWord, setTypeWord] = useState("Architecture");
 
   const panelIndex = useMemo(() => String(menu.findIndex((item) => item.id === panel) + 1).padStart(2, "0"), [panel]);
 
   const searchItems = useMemo<SearchItem[]>(() => {
     const projectItems = projects.map((item) => ({ title: item.title, panel: "portfolio" as Panel, text: `${item.title} ${item.description} ${item.tag}`.toLowerCase() }));
-    const productItems = products.map((item) => ({ title: item.title, panel: "loja" as Panel, text: `${item.title} ${item.description} ${item.tag}`.toLowerCase() }));
     const serviceItems = services.map(([title, description]) => ({ title, panel: "servicos" as Panel, text: `${title} ${description}`.toLowerCase() }));
     const fixed: SearchItem[] = [
-      { title: "Sobre", panel: "sobre", text: "sobre guilherme software engineer systems security automation" },
-      { title: "Blog", panel: "blog", text: "blog notas engenharia desenvolvimento ia segurança arquitetura automação" },
-      { title: "Setup", panel: "setup", text: "setup hardware periféricos software equipamentos afiliados" },
-      { title: "Vídeos", panel: "videos", text: "vídeos youtube shorts tiktok conteúdo" },
-      { title: "Fale comigo", panel: "sdr", text: "fale comigo orçamento projeto briefing chat sdr atendimento" },
-      { title: "Cartão digital", panel: "cartao", text: "cartão digital whatsapp redes sociais qr code vcard pdf" },
+      { title: "Sobre", panel: "sobre", text: "sobre guilherme solutions architect software engineering security ai cabo frio" },
+      { title: "Blog", panel: "blog", text: "blog engenharia inteligência artificial segurança arquitetura" },
+      { title: "Setup", panel: "setup", text: "setup hardware software ferramentas" },
+      { title: "Vídeos", panel: "videos", text: "vídeos conteúdo" },
+      { title: "Fale comigo", panel: "sdr", text: "fale comigo projeto briefing consultoria" },
+      { title: "Cartão digital", panel: "cartao", text: "contato linkedin instagram github cabo frio" },
     ];
-    return [...fixed, ...projectItems, ...productItems, ...serviceItems];
+    return [...fixed, ...projectItems, ...serviceItems];
   }, []);
 
   const searchHits = useMemo(() => {
@@ -86,11 +107,7 @@ export default function Home() {
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) {
-      setBootVisible(false);
-      setInterfaceReady(true);
-      return;
-    }
+    if (reduced) { setBootVisible(false); setInterfaceReady(true); return; }
     let line = 0;
     const lineTimer = window.setInterval(() => {
       line += 1;
@@ -98,15 +115,8 @@ export default function Home() {
       if (line >= bootLines.length) window.clearInterval(lineTimer);
     }, 85);
     const exitTimer = window.setTimeout(() => setBootExiting(true), 1500);
-    const doneTimer = window.setTimeout(() => {
-      setBootVisible(false);
-      setInterfaceReady(true);
-    }, 1800);
-    return () => {
-      window.clearInterval(lineTimer);
-      window.clearTimeout(exitTimer);
-      window.clearTimeout(doneTimer);
-    };
+    const doneTimer = window.setTimeout(() => { setBootVisible(false); setInterfaceReady(true); }, 1800);
+    return () => { window.clearInterval(lineTimer); window.clearTimeout(exitTimer); window.clearTimeout(doneTimer); };
   }, []);
 
   useEffect(() => {
@@ -117,32 +127,20 @@ export default function Home() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
+    return () => { window.removeEventListener("scroll", onScroll); window.removeEventListener("resize", onScroll); };
   }, []);
 
   useEffect(() => {
-    const words = ["Systems", "Security", "Automation", "AI"];
+    const words = ["Architecture", "Software", "Security", "AI"];
     let wi = 0, ci = words[0].length, deleting = true, timer = 0;
     const tick = () => {
       const word = words[wi];
       if (!deleting) {
-        ci += 1;
-        setTypeWord(word.slice(0, ci));
-        if (ci === word.length) {
-          deleting = true;
-          timer = window.setTimeout(tick, 900);
-          return;
-        }
+        ci += 1; setTypeWord(word.slice(0, ci));
+        if (ci === word.length) { deleting = true; timer = window.setTimeout(tick, 900); return; }
       } else {
-        ci -= 1;
-        setTypeWord(word.slice(0, ci));
-        if (ci === 0) {
-          deleting = false;
-          wi = (wi + 1) % words.length;
-        }
+        ci -= 1; setTypeWord(word.slice(0, ci));
+        if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; }
       }
       timer = window.setTimeout(tick, deleting ? 45 : 70);
     };
@@ -161,9 +159,7 @@ export default function Home() {
     const value = draft.trim();
     if (!value || sending) return;
     const nextMessages = [...messages, { role: "user" as const, content: value }];
-    setMessages(nextMessages);
-    setDraft("");
-    setSending(true);
+    setMessages(nextMessages); setDraft(""); setSending(true);
     try {
       const response = await fetch("/api/chat", {
         method: "POST",
@@ -188,9 +184,7 @@ export default function Home() {
       }
     } catch (error) {
       setMessages((current) => [...current, { role: "assistant", content: error instanceof Error ? error.message : "Tive um problema para responder agora." }]);
-    } finally {
-      setSending(false);
-    }
+    } finally { setSending(false); }
   }
 
   return (
@@ -213,26 +207,17 @@ export default function Home() {
 
         <header className="consolebar reveal reveal1">
           <div className="brand">
-            <span>&gt;</span>
-            <span>guilhermedemorais.dev</span>
+            <span>&gt;</span><span>guilhermedemorais.dev</span>
             <button className="cursorButton" aria-label="Abrir pesquisa" onClick={() => setSearchOpen(true)}><span className="cursor" /></button>
           </div>
-
           <div className={`searchOverlay ${searchOpen ? "open" : ""}`}>
             <span>&gt;</span>
-            <input
-              value={searchQuery}
-              onChange={(event) => setSearchQuery(event.target.value)}
-              onKeyDown={(event) => {
-                if (event.key === "Escape") {
-                  setSearchOpen(false);
-                  setSearchQuery("");
-                }
-                if (event.key === "Enter" && searchHits[0]) selectPanel(searchHits[0].panel);
+            <input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Escape") { setSearchOpen(false); setSearchQuery(""); }
+                if (e.key === "Enter" && searchHits[0]) selectPanel(searchHits[0].panel);
               }}
-              autoFocus={searchOpen}
-              aria-label="Pesquisar no site"
-            />
+              autoFocus={searchOpen} aria-label="Pesquisar no site" />
             <button className="cursorButton" aria-label="Fechar pesquisa" onClick={() => { setSearchOpen(false); setSearchQuery(""); }}><span className="cursor" /></button>
           </div>
           <span className="locale">BR</span>
@@ -252,14 +237,13 @@ export default function Home() {
           <section className="profile">
             <div className="avatar reveal reveal2"><img src="/profile.jpg" alt="Guilherme de Morais" /></div>
             <h1 className="reveal reveal3">GUILHERME DE MORAIS</h1>
-            <p className="role reveal reveal4">Software Engineer · <span className="typeLine">{typeWord}</span></p>
-            <p className="bio reveal reveal5">Construindo sistemas, automações e produtos digitais que resolvem problemas reais.</p>
+            <p className="role reveal reveal4">Solutions Architect · Software Engineering · Security & AI</p>
+            <p className="bio reveal reveal5">Entendo problemas, desenho soluções técnicas e transformo complexidade em sistemas que podem ser construídos, operados e evoluídos.</p>
+            <p className="location reveal reveal5">Cabo Frio, RJ · Brasil · <span className="typeLine">{typeWord}</span></p>
             <div className="socials reveal reveal6">
               <a href="https://github.com/guilhermedemorais-dev" target="_blank" rel="noreferrer" aria-label="GitHub"><SocialIcon kind="github" /></a>
-              <a href="#" aria-label="LinkedIn"><SocialIcon kind="linkedin" /></a>
-              <a href="#" aria-label="Instagram"><SocialIcon kind="instagram" /></a>
-              <a href="#" aria-label="YouTube"><SocialIcon kind="youtube" /></a>
-              <a href="#" aria-label="TikTok"><SocialIcon kind="tiktok" /></a>
+              <a href="https://www.linkedin.com/in/guilherme-de-morais-a440a8132" target="_blank" rel="noreferrer" aria-label="LinkedIn"><SocialIcon kind="linkedin" /></a>
+              <a href="https://www.instagram.com/guilhermedmoraisss" target="_blank" rel="noreferrer" aria-label="Instagram"><SocialIcon kind="instagram" /></a>
             </div>
           </section>
 
@@ -275,8 +259,25 @@ export default function Home() {
             {panel === "sobre" && (
               <div className="panel enter">
                 <div className="eyebrow">01 · Sobre mim</div>
-                <h2>Engenharia, sistemas e segurança.</h2>
-                <p className="lead">Software, automação, infraestrutura e produtos digitais com foco em problemas reais.</p>
+                <h2>De construir sites a desenhar soluções.</h2>
+                <p className="lead">Minha carreira não evoluiu de uma tecnologia para outra. Evoluiu de executar soluções para entender problemas.</p>
+
+                <div className="storyIntro">
+                  <p>Comecei cedo com tecnologia: informática aos 12, planilhas com fórmulas, macros e interfaces aos 15 e manutenção de computadores como renda extra aos 16.</p>
+                  <p>Na faculdade de Análise e Desenvolvimento de Sistemas, comecei a desenvolver sites para complementar renda. O primeiro foi para uma imobiliária. Depois vieram agências de marketing, WordPress, temas e plugins em código, Elementor, lojas virtuais e operações de e-commerce.</p>
+                  <p>Foi acompanhando essas operações que parei de enxergar apenas páginas e funcionalidades. Passei a olhar vendas, estoque, atendimento, integrações, infraestrutura, processos e resultado de negócio como partes do mesmo sistema.</p>
+                </div>
+
+                <div className="timeline">
+                  {journey.map(([period,title,text]) => (
+                    <article className="timelineItem" key={period+title}>
+                      <span>{period}</span><div><h3>{title}</h3><p>{text}</p></div>
+                    </article>
+                  ))}
+                </div>
+
+                <div className="quoteBlock">Construir software me ensinou como sistemas funcionam. Arquitetura me ensinou a enxergá-los como um todo. Segurança está me ensinando a questionar onde eles podem falhar.</div>
+
                 <div className="grid2">{services.map(([title, description]) => <article className="lineCard" key={title}><h3>{title}</h3><p>{description}</p></article>)}</div>
               </div>
             )}
@@ -284,24 +285,49 @@ export default function Home() {
             {panel === "portfolio" && (
               <div className="panel enter">
                 <div className="eyebrow">02 · Portfólio</div>
-                <h2>Projetos que já saíram da ideia.</h2>
-                <div className="list">{projects.map((item) => <article className="row" key={item.title}><div className="thumb">{item.tag}</div><div><strong>{item.title}</strong><p>{item.description}</p></div><span className="arrow">→</span></article>)}</div>
+                <h2>Sistemas, produtos e pesquisa.</h2>
+                <p className="lead">Projetos em diferentes estágios, apresentados pelo que realmente são: produto, pesquisa, desenvolvimento ou pausa estratégica.</p>
+                <div className="projectGrid">
+                  {projects.map((item) => {
+                    const meta=projectMeta[item.title];
+                    return <a className="projectCard" key={item.title} href={meta?.url || "#"} target="_blank" rel="noreferrer">
+                      <div className="projectCover">{meta?.cover ? <img src={meta.cover} alt="" /> : <span>{item.tag}</span>}</div>
+                      <div className="projectMeta"><span>{meta?.status || "PROJETO"}</span><span>{meta?.kind || item.tag}</span></div>
+                      <h3>{item.title}</h3><p>{item.description}</p><div className="projectLink">ver projeto ↗</div>
+                    </a>;
+                  })}
+                </div>
               </div>
             )}
 
-            {panel === "servicos" && <div className="panel enter"><div className="eyebrow">03 · Serviços</div><h2>Do problema à solução.</h2><p className="lead">Sistemas web, automações, infraestrutura e segurança.</p></div>}
-            {panel === "blog" && <SimplePanel eyebrow="04 · Blog" title="Notas de engenharia." text="Desenvolvimento, IA, segurança, arquitetura e automação." />}
+            {panel === "servicos" && (
+              <div className="panel enter"><div className="eyebrow">03 · Serviços</div><h2>Do problema à solução.</h2>
+                <p className="lead">Arquitetura de soluções, engenharia de software, IA aplicada e segurança com visão de negócio e operação.</p>
+                <div className="grid2">{services.map(([title,description])=><article className="lineCard" key={title}><h3>{title}</h3><p>{description}</p></article>)}</div>
+              </div>
+            )}
+            {panel === "blog" && <SimplePanel eyebrow="04 · Blog" title="Notas de engenharia." text="Arquitetura, IA, segurança, software e pesquisa técnica." />}
 
             {panel === "loja" && (
               <div className="panel enter">
-                <div className="eyebrow">05 · Loja de software</div><h2>Software pronto para adaptar.</h2>
-                <div className="list">{products.map((item) => <article className="row" key={item.title}><div className="thumb">{item.tag}</div><div><strong>{item.title}</strong><p>{item.description}</p></div><span className="arrow">→</span></article>)}</div>
+                <div className="eyebrow">05 · Loja de software</div><h2>Em preparação.</h2>
+                <p className="lead">A seleção de produtos comerciais ainda está sendo definida. Os projetos open source que entrarem aqui serão adaptados, reestruturados e apresentados com identidade própria antes da comercialização.</p>
+                {products.length > 0 && <div className="list">{products.map((item) => <article className="row" key={item.title}><div className="thumb">{item.tag}</div><div><strong>{item.title}</strong><p>{item.description}</p></div><span className="arrow">→</span></article>)}</div>}
               </div>
             )}
 
-            {panel === "setup" && <SimplePanel eyebrow="06 · Setup / Afiliados" title="Ferramentas que eu realmente uso." text="Hardware, periféricos, software e equipamentos recomendados." />}
-            {panel === "videos" && <SimplePanel eyebrow="07 · Vídeos" title="Conteúdo em vídeo." text="YouTube, Shorts, TikTok e outras plataformas." />}
-            {panel === "cartao" && <SimplePanel eyebrow="09 · Cartão digital" title="Um contato. Todos os caminhos." text="WhatsApp, redes sociais, QR Code, vCard e PDF." />}
+            {panel === "setup" && <SimplePanel eyebrow="06 · Setup / Afiliados" title="Ferramentas que eu realmente uso." text="Hardware, software e ferramentas do meu fluxo de trabalho." />}
+            {panel === "videos" && <SimplePanel eyebrow="07 · Vídeos" title="Conteúdo em construção." text="Tecnologia, engenharia, IA, segurança e a vida fora da tela." />}
+            {panel === "cartao" && (
+              <div className="panel enter"><div className="eyebrow">09 · Cartão digital</div><h2>Um contato. Todos os caminhos.</h2>
+                <p className="lead">Cabo Frio, RJ · Brasil</p>
+                <div className="contactLinks">
+                  <a href="https://github.com/guilhermedemorais-dev" target="_blank" rel="noreferrer">GitHub ↗</a>
+                  <a href="https://www.linkedin.com/in/guilherme-de-morais-a440a8132" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+                  <a href="https://www.instagram.com/guilhermedmoraisss" target="_blank" rel="noreferrer">Instagram ↗</a>
+                </div>
+              </div>
+            )}
 
             {panel === "sdr" && (
               <div className="chatPanel enter">
