@@ -43,6 +43,12 @@ const projectMeta: Record<string,{status:string;kind:string;url:string;cover:str
     kind: "Developer tooling",
     url: "https://github.com/guilhermedemorais-dev/Dev-workflow",
     cover: "https://opengraph.githubassets.com/portfolio-harness/guilhermedemorais-dev/Dev-workflow"
+  },
+  "Salve o Pau Brasil": {
+    status: "PLANEJAMENTO MVP",
+    kind: "Startup / impacto ambiental",
+    url: "https://github.com/guilhermedemorais-dev/paubrasil-",
+    cover: ""
   }
 };
 
