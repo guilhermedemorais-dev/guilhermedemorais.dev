@@ -19,6 +19,11 @@ export const projects = [
     description: "Governança e automação do fluxo de engenharia com agentes, validação e segurança.",
     tag: "DEV",
   },
+  {
+    title: "Salve o Pau Brasil",
+    description: "Projeto de monitoramento ambiental em fase de planejamento de MVP, com software, IA e componentes Web3.",
+    tag: "R&D",
+  },
 ];
 
 export const products = [] as const;
