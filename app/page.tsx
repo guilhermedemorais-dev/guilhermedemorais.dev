@@ -48,7 +48,7 @@ const projectMeta: Record<string,{status:string;kind:string;url:string;cover:str
     status: "PLANEJAMENTO MVP",
     kind: "Startup / impacto ambiental",
     url: "https://github.com/guilhermedemorais-dev/paubrasil-",
-    cover: ""
+    cover: "https://opengraph.githubassets.com/portfolio-paubrasil/guilhermedemorais-dev/paubrasil-"
   }
 };
 
@@ -317,7 +317,7 @@ export default function Home() {
             {panel === "loja" && (
               <div className="panel enter">
                 <div className="eyebrow">05 · Loja de software</div><h2>Em preparação.</h2>
-                <p className="lead">A seleção de produtos comerciais ainda está sendo definida. Os projetos open source que entrarem aqui serão adaptados, reestruturados e apresentados com identidade própria antes da comercialização.</p>
+                <p className="lead">A seleção de produtos comerciais ainda está sendo definida. Os projetos open source que entrarem aqui serão selecionados apenas quando a licença permitir uso comercial, depois adaptados, reestruturados e apresentados com identidade própria, preservando atribuições e obrigações de licença quando aplicáveis.</p>
                 <div className="emptyState">Catálogo comercial ainda não publicado.</div>
               </div>
             )}
