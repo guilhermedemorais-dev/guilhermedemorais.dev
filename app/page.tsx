@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
-import { journey, projects, services } from "@/data/site";
+import { caseStudies, evolution, featuredProjects, projects, services } from "@/data/site";
 
 type Panel = "sobre" | "portfolio" | "servicos" | "blog" | "loja" | "setup" | "videos" | "sdr" | "cartao";
 type Message = { role: "user" | "assistant"; content: string };
@@ -264,37 +264,43 @@ export default function Home() {
 
             {panel === "sobre" && (
               <div className="panel enter">
-                <div className="eyebrow">01 · Sobre mim</div>
-                <h2>De construir sites a desenhar soluções.</h2>
-                <p className="lead">Minha carreira não evoluiu de uma tecnologia para outra. Evoluiu de executar soluções para entender problemas.</p>
+                <div className="eyebrow">01 · Posicionamento</div>
+                <h2>Transformo problemas de negócio em soluções tecnológicas executáveis.</h2>
+                <p className="lead">Atuo na interseção entre arquitetura de soluções, engenharia de software, inteligência artificial e segurança. Meu trabalho começa entendendo o problema, as restrições, as integrações e os riscos antes de escolher tecnologia.</p>
 
-                <div className="storyIntro">
-                  <p>Comecei cedo com tecnologia: informática aos 12, planilhas com fórmulas, macros e interfaces aos 15 e manutenção de computadores como renda extra aos 16.</p>
-                  <p>Na faculdade de Análise e Desenvolvimento de Sistemas, comecei a desenvolver sites para complementar renda. O primeiro foi para uma imobiliária. Depois vieram agências de marketing, WordPress, temas e plugins em código, Elementor, lojas virtuais e operações de e-commerce.</p>
-                  <p>Foi acompanhando essas operações que parei de enxergar apenas páginas e funcionalidades. Passei a olhar vendas, estoque, atendimento, integrações, infraestrutura, processos e resultado de negócio como partes do mesmo sistema.</p>
+                <div className="valueGrid">
+                  <article className="valueCard"><span>01</span><h3>Entendo o problema</h3><p>Mapeio operação, gargalos, usuários, dependências, riscos e objetivos de negócio.</p></article>
+                  <article className="valueCard"><span>02</span><h3>Desenho a solução</h3><p>Defino arquitetura, componentes, integrações, responsabilidades e decisões técnicas.</p></article>
+                  <article className="valueCard"><span>03</span><h3>Executo ou conduzo</h3><p>Construo partes críticas, valido decisões e conduzo a implementação até a solução funcionar de verdade.</p></article>
                 </div>
 
-                <div className="timeline">
-                  {journey.map(([period,title,text]) => (
-                    <article className="timelineItem" key={period+title}>
-                      <span>{period}</span><div><h3>{title}</h3><p>{text}</p></div>
-                    </article>
+                <div className="evolutionBlock">
+                  <div className="eyebrow">Evolução profissional</div>
+                  {evolution.map(([title,text]) => (
+                    <article className="evolutionItem" key={title}><h3>{title}</h3><p>{text}</p></article>
                   ))}
                 </div>
 
-                <div className="quoteBlock">Construir software me ensinou como sistemas funcionam. Arquitetura me ensinou a enxergá-los como um todo. Segurança está me ensinando a questionar onde eles podem falhar.</div>
+                <div className="quoteBlock">Tecnologia é ferramenta. O valor está em entender o problema certo, desenhar a solução certa e fazê-la funcionar no mundo real.</div>
 
                 <div className="grid2">{services.map(([title, description]) => <article className="lineCard" key={title}><h3>{title}</h3><p>{description}</p></article>)}</div>
+
+                <div className="ctaRow">
+                  <button onClick={() => selectPanel("portfolio")}>Ver portfólio →</button>
+                  <button onClick={() => selectPanel("loja")}>Ver sistemas →</button>
+                </div>
               </div>
             )}
 
             {panel === "portfolio" && (
               <div className="panel enter">
                 <div className="eyebrow">02 · Portfólio</div>
-                <h2>Sistemas, produtos e pesquisa.</h2>
-                <p className="lead">Projetos em diferentes estágios, apresentados pelo que realmente são: produto, pesquisa, desenvolvimento ou pausa estratégica.</p>
+                <h2>Projetos que provam como eu penso e entrego.</h2>
+                <p className="lead">Produtos próprios e estudos de caso que demonstram arquitetura, engenharia, IA, automação e segurança aplicadas a problemas reais.</p>
+
+                <div className="sectionLabel">Projetos principais</div>
                 <div className="projectGrid">
-                  {projects.map((item) => {
+                  {featuredProjects.map((item) => {
                     const meta=projectMeta[item.title];
                     return <a className="projectCard" key={item.title} href={meta?.url || "#"} target="_blank" rel="noreferrer">
                       <div className="projectCover">{meta?.cover ? <img src={meta.cover} alt="" /> : <span>{item.tag}</span>}</div>
@@ -303,6 +309,20 @@ export default function Home() {
                     </a>;
                   })}
                 </div>
+
+                <div className="sectionLabel caseLabel">Estudos de caso & pesquisa</div>
+                <div className="projectGrid">
+                  {caseStudies.map((item) => {
+                    const meta=projectMeta[item.title];
+                    return <a className="projectCard" key={item.title} href={meta?.url || "#"} target="_blank" rel="noreferrer">
+                      <div className="projectCover">{meta?.cover ? <img src={meta.cover} alt="" /> : <span>{item.tag}</span>}</div>
+                      <div className="projectMeta"><span>{meta?.status || "CASE"}</span><span>{meta?.kind || item.tag}</span></div>
+                      <h3>{item.title}</h3><p>{item.description}</p><div className="projectLink">ver estudo ↗</div>
+                    </a>;
+                  })}
+                </div>
+
+                <div className="ctaRow"><button onClick={() => selectPanel("loja")}>Ver sistemas disponíveis →</button></div>
               </div>
             )}
 
@@ -316,9 +336,9 @@ export default function Home() {
 
             {panel === "loja" && (
               <div className="panel enter">
-                <div className="eyebrow">05 · Loja de software</div><h2>Em preparação.</h2>
-                <p className="lead">A seleção de produtos comerciais ainda está sendo definida. Os projetos open source que entrarem aqui serão selecionados apenas quando a licença permitir uso comercial, depois adaptados, reestruturados e apresentados com identidade própria, preservando atribuições e obrigações de licença quando aplicáveis.</p>
-                <div className="emptyState">Catálogo comercial ainda não publicado.</div>
+                <div className="eyebrow">05 · Sistemas</div><h2>Soluções prontas para adaptar ao seu negócio.</h2>
+                <p className="lead">Aqui ficarão sistemas que posso implantar, adaptar e integrar conforme a operação do cliente. O catálogo está sendo curado e será publicado por categoria, com demonstração, escopo e modelo de implantação.</p>
+                <div className="emptyState">Catálogo em preparação. Novos sistemas serão adicionados gradualmente.</div>
               </div>
             )}
 
