@@ -1,5 +1,5 @@
 import OpenAI from "openai";
-import { SDR_INSTRUCTIONS } from "@/lib/sdr";
+import { COMMERCE_SDR_INSTRUCTIONS, SDR_INSTRUCTIONS } from "@/lib/sdr";
 
 type ChatMessage = { role: "user" | "assistant"; content: string };
 
@@ -7,6 +7,7 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
     const messages = Array.isArray(body?.messages) ? body.messages as ChatMessage[] : [];
+    const mode = body?.mode === "commerce" ? "commerce" : "portfolio";
 
     if (!process.env.OPENAI_API_KEY) {
       return Response.json(
@@ -19,7 +20,7 @@ export async function POST(request: Request) {
 
     const response = await client.responses.create({
       model: process.env.OPENAI_MODEL || "gpt-5.6-luna",
-      instructions: SDR_INSTRUCTIONS,
+      instructions: mode === "commerce" ? COMMERCE_SDR_INSTRUCTIONS : SDR_INSTRUCTIONS,
       input: messages.map((m) => ({
         role: m.role,
         content: m.content,
