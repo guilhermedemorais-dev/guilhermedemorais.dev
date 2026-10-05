@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
-import { caseStudies, evolution, featuredProjects, projects, services } from "@/data/site";
+import { caseStudies, evolution, featuredProjects, projects, services, technicalCapabilities } from "@/data/site";
 
 type Panel = "sobre" | "portfolio" | "servicos" | "blog" | "loja" | "setup" | "videos" | "sdr" | "cartao";
 type Message = { role: "user" | "assistant"; content: string };
@@ -284,6 +284,13 @@ export default function Home() {
                 <div className="quoteBlock">Meu valor não está em dominar uma stack específica. Está em conseguir entender cenários complexos, tomar boas decisões técnicas e transformar essas decisões em sistemas que funcionam.</div>
 
                 <div className="grid2">{services.map(([title, description]) => <article className="lineCard" key={title}><h3>{title}</h3><p>{description}</p></article>)}</div>
+
+                <div className="evolutionBlock">
+                  <div className="eyebrow">Technical capabilities</div>
+                  {technicalCapabilities.map(([title, items]) => (
+                    <article className="evolutionItem" key={title}><h3>{title}</h3><p>{items}</p></article>
+                  ))}
+                </div>
 
                 <div className="ctaRow">
                   <button onClick={() => selectPanel("portfolio")}>Ver portfólio →</button>
