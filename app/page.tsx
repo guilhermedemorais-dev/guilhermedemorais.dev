@@ -252,7 +252,7 @@ export default function Home() {
         <main className="page">
           {panel === "loja" ? (
             <section className="profile companyProfile">
-              <div className="companyAvatar reveal reveal2">S</div>
+              <div className="companyAvatar reveal reveal2"><img src="/sophxy-logo.webp" alt="SOPHXY" /></div>
               <h1 className="reveal reveal3">SOPHXY</h1>
               <p className="role reveal reveal4">Digital Systems Security · Software House</p>
               <p className="bio reveal reveal5">Soluções digitais sob medida para empresas que precisam integrar operação, software, automação, inteligência artificial e segurança em um único ecossistema.</p>
