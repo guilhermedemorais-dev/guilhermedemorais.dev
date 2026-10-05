@@ -240,18 +240,20 @@ export default function Home() {
         )}
 
         <main className="page">
-          <section className="profile">
-            <div className="avatar reveal reveal2"><img src="/profile.jpg" alt="Guilherme de Morais" /></div>
-            <h1 className="reveal reveal3">GUILHERME DE MORAIS</h1>
-            <p className="role reveal reveal4">Solutions Architect · Software Engineering · Security & AI</p>
-            <p className="bio reveal reveal5">Entendo problemas, desenho soluções técnicas e transformo complexidade em sistemas que podem ser construídos, operados e evoluídos.</p>
-            <p className="location reveal reveal5">Cabo Frio, RJ · Brasil · <span className="typeLine">{typeWord}</span></p>
-            <div className="socials reveal reveal6">
-              <a href="https://github.com/guilhermedemorais-dev" target="_blank" rel="noreferrer" aria-label="GitHub"><SocialIcon kind="github" /></a>
-              <a href="https://www.linkedin.com/in/guilherme-de-morais-a440a8132" target="_blank" rel="noreferrer" aria-label="LinkedIn"><SocialIcon kind="linkedin" /></a>
-              <a href="https://www.instagram.com/guilhermedmoraisss" target="_blank" rel="noreferrer" aria-label="Instagram"><SocialIcon kind="instagram" /></a>
-            </div>
-          </section>
+          {panel !== "sdr" && (
+            <section className="profile">
+              <div className="avatar reveal reveal2"><img src="/profile.jpg" alt="Guilherme de Morais" /></div>
+              <h1 className="reveal reveal3">GUILHERME DE MORAIS</h1>
+              <p className="role reveal reveal4">Solutions Architect · Software Engineering · Security & AI</p>
+              <p className="bio reveal reveal5">Entendo problemas, desenho soluções técnicas e transformo complexidade em sistemas que podem ser construídos, operados e evoluídos.</p>
+              <p className="location reveal reveal5">Cabo Frio, RJ · Brasil · <span className="typeLine">{typeWord}</span></p>
+              <div className="socials reveal reveal6">
+                <a href="https://github.com/guilhermedemorais-dev" target="_blank" rel="noreferrer" aria-label="GitHub"><SocialIcon kind="github" /></a>
+                <a href="https://www.linkedin.com/in/guilherme-de-morais-a440a8132" target="_blank" rel="noreferrer" aria-label="LinkedIn"><SocialIcon kind="linkedin" /></a>
+                <a href="https://www.instagram.com/guilhermedmoraisss" target="_blank" rel="noreferrer" aria-label="Instagram"><SocialIcon kind="instagram" /></a>
+              </div>
+            </section>
+          )}
 
           <section className="menuShell reveal reveal7">
             <nav className="menu">
