@@ -1,45 +1,47 @@
-export const projects = [
+export const featuredProjects = [
   {
     title: "ORION CRM / ERP",
-    description: "Sistema empresarial para clientes, estoque, vendas, PDV, financeiro e automações.",
+    description: "Sistema empresarial para centralizar clientes, estoque, vendas, PDV, financeiro e automações em uma única operação.",
     tag: "ERP",
   },
   {
     title: "HabilitFy",
-    description: "Plataforma SaaS para autoescolas e instrutores. Desenvolvimento pausado temporariamente, com retomada planejada.",
+    description: "Plataforma SaaS criada para digitalizar e organizar a operação de autoescolas e instrutores.",
     tag: "SaaS",
   },
+] as const;
+
+export const caseStudies = [
   {
     title: "PIRCSEEK",
-    description: "Pesquisa experimental sobre recuperação de contexto, busca híbrida e eficiência de sistemas baseados em LLMs.",
+    description: "Estudo técnico sobre recuperação de contexto, busca híbrida e eficiência em sistemas baseados em LLMs.",
     tag: "AI",
   },
   {
     title: "Engineering Harness",
-    description: "Governança e automação do fluxo de engenharia com agentes, validação e segurança.",
+    description: "Estudo de governança e automação de engenharia com agentes, validação, segurança e processos reproduzíveis.",
     tag: "DEV",
   },
   {
     title: "Salve o Pau Brasil",
-    description: "Projeto de monitoramento ambiental em fase de planejamento de MVP, com software, IA e componentes Web3.",
+    description: "Estudo de solução para monitoramento ambiental com software, IA e componentes Web3 em fase de planejamento de MVP.",
     tag: "R&D",
   },
-];
+] as const;
+
+export const projects = [...featuredProjects, ...caseStudies] as const;
 
 export const products = [] as const;
 
 export const services = [
-  ["Solutions Architecture", "Entendimento do problema, desenho da solução, arquitetura, integrações e decisões técnicas."],
-  ["Software Engineering", "Sistemas, aplicações web, APIs, plataformas e produtos digitais de ponta a ponta."],
-  ["Security", "Segurança de aplicações, desenvolvimento seguro e evolução profissional em cibersegurança."],
-  ["Artificial Intelligence", "IA aplicada a produtos, agentes, automações, pesquisa e engenharia de software."],
+  ["Arquitetura de Soluções", "Transformo problemas de negócio em arquitetura, integrações, fluxos e decisões técnicas executáveis."],
+  ["Engenharia de Software", "Projeto e construo sistemas, plataformas, APIs e produtos digitais preparados para evoluir."],
+  ["IA Aplicada", "Uso inteligência artificial para acelerar análise, automação, produto, pesquisa e operação."],
+  ["Security by Design", "Incorporo segurança, risco e resiliência às decisões de arquitetura e desenvolvimento."],
 ] as const;
 
-export const journey = [
-  ["12–16 anos", "Tecnologia antes da carreira", "Comecei aprendendo informática aos 12. Aos 15 já criava planilhas com fórmulas, macros e interfaces para uma vidraçaria. Aos 16 fazia manutenção de computadores, montagem, sistemas e redes como renda extra."],
-  ["Faculdade", "Primeiros projetos web", "Cursei Análise e Desenvolvimento de Sistemas e, no terceiro semestre, comecei a desenvolver sites como renda extra. Meu primeiro projeto profissional foi para uma imobiliária."],
-  ["Web & e-commerce", "WordPress, lojas e operação", "Prestando serviço para agências de marketing, mergulhei em WordPress, temas e plugins em código e, depois, Elementor e low-code. Com e-commerce, passei a enxergar os problemas por trás do site: vendas, estoque, atendimento, integrações e operação."],
-  ["Infraestrutura & liderança", "Tecnologia dentro do negócio", "Na Frango Dourado, assumi decisões técnicas de TI com uma pequena equipe. Depois voltei ao desenvolvimento, construí plataformas, participei de lançamentos digitais e montei estruturas completas de tecnologia para operações online."],
-  ["Agência & consultoria", "De executar para desenhar soluções", "Na PropagBem, como sócio e líder técnico, passei a definir soluções e delegar implementação conforme o volume crescia. Depois atuei com consultoria de tecnologia e marketing digital no Hotel Laborie, conectando tecnologia, dados e negócio."],
-  ["Hoje", "Solutions Architecture, AI & Security", "Atuo como Engenheiro de Soluções na Trafegantes, pensando e construindo soluções tecnológicas para a operação. Também presto consultoria para Dry e GA, mantenho produtos e pesquisas próprias e avanço minha formação em Cibersegurança."],
+export const evolution = [
+  ["Base técnica", "Comecei cedo em tecnologia e construí experiência prática passando por infraestrutura, desenvolvimento e automação."],
+  ["Visão de negócio", "E-commerce, operações digitais, liderança técnica e consultoria ampliaram meu olhar de código para processo, integração e resultado."],
+  ["Arquitetura hoje", "Hoje atuo pensando o problema de ponta a ponta, definindo a solução técnica e conduzindo sua implementação com software, IA, infraestrutura e segurança."],
 ] as const;
