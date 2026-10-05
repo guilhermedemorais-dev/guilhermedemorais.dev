@@ -265,13 +265,13 @@ export default function Home() {
             {panel === "sobre" && (
               <div className="panel enter">
                 <div className="eyebrow">01 · Posicionamento</div>
-                <h2>Transformo problemas de negócio em soluções tecnológicas executáveis.</h2>
-                <p className="lead">Atuo na interseção entre arquitetura de soluções, engenharia de software, inteligência artificial e segurança. Meu trabalho começa entendendo o problema, as restrições, as integrações e os riscos antes de escolher tecnologia.</p>
+                <h2>Engenharia para problemas que não cabem em uma stack.</h2>
+                <p className="lead">Atuo como Solutions Architect e Software Engineer em cenários que exigem visão de sistema, autonomia técnica e capacidade de atravessar produto, software, infraestrutura, automação, IA e segurança sem tratar nenhuma tecnologia como resposta universal.</p>
 
                 <div className="valueGrid">
-                  <article className="valueCard"><span>01</span><h3>Entendo o problema</h3><p>Mapeio operação, gargalos, usuários, dependências, riscos e objetivos de negócio.</p></article>
-                  <article className="valueCard"><span>02</span><h3>Desenho a solução</h3><p>Defino arquitetura, componentes, integrações, responsabilidades e decisões técnicas.</p></article>
-                  <article className="valueCard"><span>03</span><h3>Executo ou conduzo</h3><p>Construo partes críticas, valido decisões e conduzo a implementação até a solução funcionar de verdade.</p></article>
+                  <article className="valueCard"><span>01</span><h3>Visão sistêmica</h3><p>Leio o cenário inteiro antes de tomar decisão: operação, usuários, dependências, integrações, riscos, custo e impacto no negócio.</p></article>
+                  <article className="valueCard"><span>02</span><h3>Decisão técnica</h3><p>Escolho arquitetura, stack e abordagem pelo contexto. Não pelo framework da moda, nem por apego a ferramenta.</p></article>
+                  <article className="valueCard"><span>03</span><h3>Execução hands-on</h3><p>Consigo sair da estratégia e entrar na implementação, validar partes críticas e conduzir a solução até funcionar de verdade.</p></article>
                 </div>
 
                 <div className="evolutionBlock">
@@ -281,7 +281,7 @@ export default function Home() {
                   ))}
                 </div>
 
-                <div className="quoteBlock">Tecnologia é ferramenta. O valor está em entender o problema certo, desenhar a solução certa e fazê-la funcionar no mundo real.</div>
+                <div className="quoteBlock">Meu valor não está em dominar uma stack específica. Está em conseguir entender cenários complexos, tomar boas decisões técnicas e transformar essas decisões em sistemas que funcionam.</div>
 
                 <div className="grid2">{services.map(([title, description]) => <article className="lineCard" key={title}><h3>{title}</h3><p>{description}</p></article>)}</div>
 
@@ -295,10 +295,10 @@ export default function Home() {
             {panel === "portfolio" && (
               <div className="panel enter">
                 <div className="eyebrow">02 · Portfólio</div>
-                <h2>Projetos que provam como eu penso e entrego.</h2>
-                <p className="lead">Produtos próprios e estudos de caso que demonstram arquitetura, engenharia, IA, automação e segurança aplicadas a problemas reais.</p>
+                <h2>Produtos, startups e pesquisa aplicada.</h2>
+                <p className="lead">Projetos que mostram como eu penso, construo e valido soluções em contextos diferentes.</p>
 
-                <div className="sectionLabel">Projetos principais</div>
+                <div className="sectionLabel">Projetos & Startups</div>
                 <div className="projectGrid">
                   {featuredProjects.map((item) => {
                     const meta=projectMeta[item.title];
@@ -310,7 +310,7 @@ export default function Home() {
                   })}
                 </div>
 
-                <div className="sectionLabel caseLabel">Estudos de caso & pesquisa</div>
+                <div className="sectionLabel caseLabel">Pesquisa & Engenharia</div>
                 <div className="projectGrid">
                   {caseStudies.map((item) => {
                     const meta=projectMeta[item.title];
@@ -322,13 +322,13 @@ export default function Home() {
                   })}
                 </div>
 
-                <div className="ctaRow"><button onClick={() => selectPanel("loja")}>Ver sistemas disponíveis →</button></div>
+                <div className="ctaRow"><button onClick={() => selectPanel("loja")}>Sistemas & soluções comerciais →</button></div>
               </div>
             )}
 
             {panel === "servicos" && (
-              <div className="panel enter"><div className="eyebrow">03 · Serviços</div><h2>Do problema à solução.</h2>
-                <p className="lead">Arquitetura de soluções, engenharia de software, IA aplicada e segurança com visão de negócio e operação.</p>
+              <div className="panel enter"><div className="eyebrow">03 · Atuação</div><h2>Onde eu entro e gero valor.</h2>
+                <p className="lead">Da decisão técnica à execução, atuo em cenários que exigem arquitetura, engenharia, integração, automação e visão de operação.</p>
                 <div className="grid2">{services.map(([title,description])=><article className="lineCard" key={title}><h3>{title}</h3><p>{description}</p></article>)}</div>
               </div>
             )}
