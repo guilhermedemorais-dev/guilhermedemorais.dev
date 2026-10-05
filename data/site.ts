@@ -45,3 +45,16 @@ export const evolution = [
   ["Visão sistêmica", "Liderança técnica, consultoria e contato direto com operações ampliaram meu olhar de código para processo, integração, risco e resultado."],
   ["Atuação atual", "Hoje combino arquitetura de soluções e engenharia de software para transformar cenários complexos em soluções que possam ser implementadas, operadas e evoluídas."],
 ] as const;
+
+export const technicalCapabilities = [
+  ["Architecture", "Modular Monolith · Domain-Oriented Design · API-First · REST APIs · Event-Driven Workflows · Async Processing · Queues · Webhooks · Integration Architecture · RBAC · Transactional Workflows · Caching · Monorepos · ADRs"],
+  ["Software Engineering Practices", "Spec-Driven Development (SDD) · Test-Driven Development (TDD) · Human-in-the-Loop · DevSecOps · Independent QA · PR-based Development · CI/CD"],
+  ["AI-Assisted Development", "Agentic Software Development · Coding Agents · Context Engineering · MCP · RAG · LLM APIs · Multi-Agent Workflows · AI-Assisted Code Review"],
+  ["Product & UX", "User Flows · Usability · Information Architecture · Responsive Design · Design Systems · Accessibility Awareness · UI/UX Review"],
+  ["Frontend", "Next.js · React · Vue.js · TypeScript · Tailwind CSS"],
+  ["Backend", "Node.js · NestJS · Express · PHP · Laravel · Python · C++"],
+  ["Data", "PostgreSQL · MySQL · MongoDB · Redis · SQLite"],
+  ["Infrastructure", "Docker · Linux · NGINX · AWS · Vercel · DigitalOcean · VPS · GitHub Actions"],
+  ["Automation", "n8n · Webhooks · API Integrations · Workflow Automation"],
+  ["Web Platforms", "WordPress · Custom Themes · Custom Plugins · Headless WordPress · WooCommerce"],
+] as const;
