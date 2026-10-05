@@ -80,6 +80,7 @@ export default function Home() {
   const [draft, setDraft] = useState("");
   const [sending, setSending] = useState(false);
   const [briefingSent, setBriefingSent] = useState(false);
+  const [chatMode, setChatMode] = useState<"portfolio" | "commerce">("portfolio");
   const [bootVisible, setBootVisible] = useState(true);
   const [bootExiting, setBootExiting] = useState(false);
   const [bootCount, setBootCount] = useState(0);
@@ -160,6 +161,15 @@ export default function Home() {
     setSearchQuery("");
   }
 
+  function startCommerceChat() {
+    setChatMode("commerce");
+    setBriefingSent(false);
+    setMessages([{ role: "assistant", content: "Me conta o que sua empresa precisa resolver. Vou levantar o escopo para a SOPHXY analisar e precificar." }]);
+    setPanel("sdr");
+    setSearchOpen(false);
+    setSearchQuery("");
+  }
+
   async function sendMessage(event: FormEvent) {
     event.preventDefault();
     const value = draft.trim();
@@ -170,7 +180,7 @@ export default function Home() {
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: nextMessages }),
+        body: JSON.stringify({ messages: nextMessages, mode: chatMode }),
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data?.error || "Falha no atendimento.");
@@ -181,11 +191,11 @@ export default function Home() {
         const emailResponse = await fetch("/api/briefing", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ briefing: data.briefing, transcript: finalMessages }),
+          body: JSON.stringify({ briefing: data.briefing, transcript: finalMessages, channel: chatMode }),
         });
         if (emailResponse.ok) {
           setBriefingSent(true);
-          setMessages((current) => [...current, { role: "assistant", content: "Perfeito. Seu briefing foi enviado. Guilherme continua o atendimento com você pelo contato informado." }]);
+          setMessages((current) => [...current, { role: "assistant", content: chatMode === "commerce" ? "Briefing concluído. A SOPHXY recebeu o escopo para análise e precificação." : "Perfeito. Seu briefing foi enviado. Guilherme continua o atendimento com você pelo contato informado." }]);
         }
       }
     } catch (error) {
@@ -248,7 +258,7 @@ export default function Home() {
               <p className="bio reveal reveal5">Soluções digitais sob medida para empresas que precisam integrar operação, software, automação, inteligência artificial e segurança em um único ecossistema.</p>
               <p className="location reveal reveal5">Cabo Frio, RJ · Brasil · Sistemas sob medida</p>
               <div className="companyActions reveal reveal6">
-                <a href="https://wa.me/5522998911070?text=Ol%C3%A1%2C%20vim%20pela%20p%C3%A1gina%20da%20SOPHXY%20e%20quero%20falar%20sobre%20uma%20solu%C3%A7%C3%A3o." target="_blank" rel="noreferrer">Falar no WhatsApp →</a>
+                <button type="button" onClick={startCommerceChat}>Iniciar ChatCommerce →</button>
               </div>
             </section>
           ) : panel !== "sdr" && (
@@ -358,8 +368,8 @@ export default function Home() {
               <div className="panel enter">
                 <div className="eyebrow">05 · Sistemas & Soluções Comerciais</div><h2>Tecnologia que se adapta à operação, não o contrário.</h2>
                 <p className="lead">A SOPHXY reúne sistemas, automações e soluções que podem ser implantados, personalizados e integrados conforme a realidade de cada negócio.</p>
-                <div className="emptyState">Catálogo em preparação. Enquanto isso, o atendimento comercial é feito diretamente pelo WhatsApp.</div>
-                <div className="ctaRow"><a className="whatsappCta" href="https://wa.me/5522998911070?text=Ol%C3%A1%2C%20vim%20pela%20p%C3%A1gina%20da%20SOPHXY%20e%20quero%20falar%20sobre%20uma%20solu%C3%A7%C3%A3o." target="_blank" rel="noreferrer">Falar com a SOPHXY no WhatsApp →</a></div>
+                <div className="emptyState">Catálogo em preparação. O ChatCommerce coleta o escopo e encaminha o briefing para análise e precificação.</div>
+                <div className="ctaRow"><button type="button" onClick={startCommerceChat}>Iniciar ChatCommerce →</button></div>
               </div>
             )}
 
