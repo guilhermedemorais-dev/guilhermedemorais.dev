@@ -240,7 +240,18 @@ export default function Home() {
         )}
 
         <main className="page">
-          {panel !== "sdr" && (
+          {panel === "loja" ? (
+            <section className="profile companyProfile">
+              <div className="companyAvatar reveal reveal2">S</div>
+              <h1 className="reveal reveal3">SOPHXY</h1>
+              <p className="role reveal reveal4">Digital Systems Security · Software House</p>
+              <p className="bio reveal reveal5">Soluções digitais sob medida para empresas que precisam integrar operação, software, automação, inteligência artificial e segurança em um único ecossistema.</p>
+              <p className="location reveal reveal5">Cabo Frio, RJ · Brasil · Sistemas sob medida</p>
+              <div className="companyActions reveal reveal6">
+                <a href="https://wa.me/5522998911070?text=Ol%C3%A1%2C%20vim%20pela%20p%C3%A1gina%20da%20SOPHXY%20e%20quero%20falar%20sobre%20uma%20solu%C3%A7%C3%A3o." target="_blank" rel="noreferrer">Falar no WhatsApp →</a>
+              </div>
+            </section>
+          ) : panel !== "sdr" && (
             <section className="profile">
               <div className="avatar reveal reveal2"><img src="/profile.jpg" alt="Guilherme de Morais" /></div>
               <h1 className="reveal reveal3">GUILHERME DE MORAIS</h1>
@@ -345,9 +356,10 @@ export default function Home() {
 
             {panel === "loja" && (
               <div className="panel enter">
-                <div className="eyebrow">05 · Sistemas</div><h2>Soluções prontas para adaptar ao seu negócio.</h2>
-                <p className="lead">Aqui ficarão sistemas que posso implantar, adaptar e integrar conforme a operação do cliente. O catálogo está sendo curado e será publicado por categoria, com demonstração, escopo e modelo de implantação.</p>
-                <div className="emptyState">Catálogo em preparação. Novos sistemas serão adicionados gradualmente.</div>
+                <div className="eyebrow">05 · Sistemas & Soluções Comerciais</div><h2>Tecnologia que se adapta à operação, não o contrário.</h2>
+                <p className="lead">A SOPHXY reúne sistemas, automações e soluções que podem ser implantados, personalizados e integrados conforme a realidade de cada negócio.</p>
+                <div className="emptyState">Catálogo em preparação. Enquanto isso, o atendimento comercial é feito diretamente pelo WhatsApp.</div>
+                <div className="ctaRow"><a className="whatsappCta" href="https://wa.me/5522998911070?text=Ol%C3%A1%2C%20vim%20pela%20p%C3%A1gina%20da%20SOPHXY%20e%20quero%20falar%20sobre%20uma%20solu%C3%A7%C3%A3o." target="_blank" rel="noreferrer">Falar com a SOPHXY no WhatsApp →</a></div>
               </div>
             )}
 
