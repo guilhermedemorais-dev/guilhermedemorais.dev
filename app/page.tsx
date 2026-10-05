@@ -9,8 +9,8 @@ type SearchItem = { title: string; panel: Panel; text: string };
 
 const menu: { id: Panel; label: string }[] = [
   { id: "sobre", label: "Sobre" },
-  { id: "portfolio", label: "Portfólio" },
   { id: "servicos", label: "Serviços" },
+  { id: "portfolio", label: "Portfólio" },
   { id: "blog", label: "Blog" },
   { id: "loja", label: "Loja" },
   { id: "setup", label: "Setup" },
