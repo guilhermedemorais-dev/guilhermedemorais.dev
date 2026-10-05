@@ -6,26 +6,26 @@ export const featuredProjects = [
   },
   {
     title: "HabilitFy",
-    description: "Plataforma SaaS criada para digitalizar e organizar a operação de autoescolas e instrutores.",
+    description: "Startup SaaS criada para digitalizar e organizar a operação de autoescolas, instrutores e alunos.",
     tag: "SaaS",
+  },
+  {
+    title: "Salve o Pau Brasil",
+    description: "Startup de tecnologia e impacto ambiental em fase de planejamento do MVP, com monitoramento ambiental, IA e componentes Web3.",
+    tag: "R&D",
   },
 ] as const;
 
 export const caseStudies = [
   {
     title: "PIRCSEEK",
-    description: "Estudo técnico sobre recuperação de contexto, busca híbrida e eficiência em sistemas baseados em LLMs.",
+    description: "Pesquisa técnica sobre recuperação de contexto, busca híbrida e eficiência em sistemas baseados em LLMs.",
     tag: "AI",
   },
   {
     title: "Engineering Harness",
-    description: "Estudo de governança e automação de engenharia com agentes, validação, segurança e processos reproduzíveis.",
+    description: "Pesquisa e engenharia aplicada a governança de desenvolvimento com agentes, validação, segurança e processos reproduzíveis.",
     tag: "DEV",
-  },
-  {
-    title: "Salve o Pau Brasil",
-    description: "Estudo de solução para monitoramento ambiental com software, IA e componentes Web3 em fase de planejamento de MVP.",
-    tag: "R&D",
   },
 ] as const;
 
@@ -34,14 +34,14 @@ export const projects = [...featuredProjects, ...caseStudies] as const;
 export const products = [] as const;
 
 export const services = [
-  ["Arquitetura de Soluções", "Transformo problemas de negócio em arquitetura, integrações, fluxos e decisões técnicas executáveis."],
-  ["Engenharia de Software", "Projeto e construo sistemas, plataformas, APIs e produtos digitais preparados para evoluir."],
-  ["IA Aplicada", "Uso inteligência artificial para acelerar análise, automação, produto, pesquisa e operação."],
-  ["Security by Design", "Incorporo segurança, risco e resiliência às decisões de arquitetura e desenvolvimento."],
+  ["Arquitetura & Decisão Técnica", "Estruturo soluções, avalio trade-offs e defino como sistemas, dados, integrações e infraestrutura devem trabalhar juntos."],
+  ["Engenharia de Software", "Projeto e construo aplicações, plataformas, APIs e sistemas internos preparados para evoluir com a operação."],
+  ["Automação & IA", "Aplico automação e inteligência artificial onde existe ganho real de eficiência, velocidade ou capacidade operacional."],
+  ["Consultoria Técnica", "Diagnóstico cenários, identifico gargalos e ajudo empresas a decidir o que construir, integrar, modernizar ou substituir."],
 ] as const;
 
 export const evolution = [
-  ["Base técnica", "Comecei cedo em tecnologia e construí experiência prática passando por infraestrutura, desenvolvimento e automação."],
-  ["Visão de negócio", "E-commerce, operações digitais, liderança técnica e consultoria ampliaram meu olhar de código para processo, integração e resultado."],
-  ["Arquitetura hoje", "Hoje atuo pensando o problema de ponta a ponta, definindo a solução técnica e conduzindo sua implementação com software, IA, infraestrutura e segurança."],
+  ["Base técnica", "Minha trajetória passou por infraestrutura, desenvolvimento, sistemas, operações digitais e construção de produtos."],
+  ["Visão sistêmica", "Liderança técnica, consultoria e contato direto com operações ampliaram meu olhar de código para processo, integração, risco e resultado."],
+  ["Atuação atual", "Hoje combino arquitetura de soluções e engenharia de software para transformar cenários complexos em soluções que possam ser implementadas, operadas e evoluídas."],
 ] as const;
