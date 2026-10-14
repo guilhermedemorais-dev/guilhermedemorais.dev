@@ -67,6 +67,48 @@ const bootLines = [
   "> READY",
 ];
 
+
+function AsciiBootPortrait({ progress }: { progress: number }) {
+  const [lines, setLines] = useState<string[]>([]);
+
+  useEffect(() => {
+    const image = new Image();
+    image.src = "/profile.jpg";
+    image.onload = () => {
+      const cols = window.innerWidth < 640 ? 54 : 92;
+      const ratio = image.naturalHeight / image.naturalWidth;
+      const rows = Math.max(34, Math.round(cols * ratio * 0.5));
+      const canvas = document.createElement("canvas");
+      canvas.width = cols;
+      canvas.height = rows;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+      ctx.drawImage(image, 0, 0, cols, rows);
+      const pixels = ctx.getImageData(0, 0, cols, rows).data;
+      const ramp = " .,:;irsXA253hMHGS#9B&@";
+      const next: string[] = [];
+      for (let y = 0; y < rows; y += 1) {
+        let row = "";
+        for (let x = 0; x < cols; x += 1) {
+          const i = (y * cols + x) * 4;
+          const luminance = 0.2126 * pixels[i] + 0.7152 * pixels[i + 1] + 0.0722 * pixels[i + 2];
+          const normalized = Math.max(0, Math.min(1, (255 - luminance) / 255));
+          row += ramp[Math.min(ramp.length - 1, Math.floor(normalized * (ramp.length - 1)))];
+        }
+        next.push(row);
+      }
+      setLines(next);
+    };
+  }, []);
+
+  const visible = Math.ceil(lines.length * Math.min(1, Math.max(0, progress)));
+  return (
+    <pre className="bootAscii" aria-hidden="true">
+      {lines.slice(0, visible).map((line, index) => <span key={index}>{line}</span>)}
+    </pre>
+  );
+}
+
 function SocialIcon({ kind }: { kind: "github" | "linkedin" | "instagram" }) {
   const common = { viewBox: "0 0 24 24", width: 14, height: 14, fill: "currentColor", "aria-hidden": true } as const;
   if (kind === "github") return <svg {...common}><path d="M12 .7A11.3 11.3 0 0 0 8.43 22.72c.57.1.78-.25.78-.55v-2.15c-3.19.69-3.86-1.35-3.86-1.35-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.67 1.25 3.32.96.1-.74.4-1.25.73-1.54-2.55-.29-5.23-1.27-5.23-5.66 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.46.11-3.03 0 0 .96-.31 3.14 1.17a10.9 10.9 0 0 1 5.72 0c2.18-1.48 3.14-1.17 3.14-1.17.62 1.57.23 2.74.11 3.03.73.8 1.18 1.82 1.18 3.07 0 4.4-2.69 5.37-5.25 5.65.41.35.78 1.05.78 2.12v3.15c0 .3.21.66.79.55A11.3 11.3 0 0 0 12 .7Z" /></svg>;
@@ -84,6 +126,7 @@ export default function Home() {
   const [bootVisible, setBootVisible] = useState(true);
   const [bootExiting, setBootExiting] = useState(false);
   const [bootCount, setBootCount] = useState(0);
+  const [bootProgress, setBootProgress] = useState(0);
   const [interfaceReady, setInterfaceReady] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -115,15 +158,21 @@ export default function Home() {
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) { setBootVisible(false); setInterfaceReady(true); return; }
-    let line = 0;
-    const lineTimer = window.setInterval(() => {
-      line += 1;
-      setBootCount(Math.min(line, bootLines.length));
-      if (line >= bootLines.length) window.clearInterval(lineTimer);
-    }, 85);
-    const exitTimer = window.setTimeout(() => setBootExiting(true), 1500);
-    const doneTimer = window.setTimeout(() => { setBootVisible(false); setInterfaceReady(true); }, 1800);
-    return () => { window.clearInterval(lineTimer); window.clearTimeout(exitTimer); window.clearTimeout(doneTimer); };
+
+    const duration = 3000;
+    const startedAt = performance.now();
+    let raf = 0;
+    const animate = (now: number) => {
+      const value = Math.min(1, (now - startedAt) / duration);
+      setBootProgress(value);
+      setBootCount(Math.min(bootLines.length, Math.max(1, Math.floor(value * bootLines.length) + 1)));
+      if (value < 1) raf = requestAnimationFrame(animate);
+    };
+    raf = requestAnimationFrame(animate);
+
+    const exitTimer = window.setTimeout(() => setBootExiting(true), duration + 120);
+    const doneTimer = window.setTimeout(() => { setBootVisible(false); setInterfaceReady(true); }, duration + 450);
+    return () => { cancelAnimationFrame(raf); window.clearTimeout(exitTimer); window.clearTimeout(doneTimer); };
   }, []);
 
   useEffect(() => {
@@ -207,12 +256,29 @@ export default function Home() {
     <>
       {bootVisible && (
         <div className={`bootScreen ${bootExiting ? "exit" : ""}`} aria-hidden="true">
-          <div className="bootConsole">
-            {bootLines.slice(Math.max(0, bootCount - 10), bootCount).map((line, index) => (
-              <div key={`${line}-${index}`} className={line === "> READY" ? "bootReady" : ""}>
-                {line}{line === "> READY" && <span className="bootCursor" />}
+          <div className="bootFrame">
+            <div className="bootPortraitStage">
+              <div className="bootPortraitWindow">
+                <div className="bootWindowBar"><span>guilherme@portfolio:~$ ./init.sh</span><span>{Math.round(bootProgress * 100)}%</span></div>
+                <div className="bootAsciiViewport">
+                  <AsciiBootPortrait progress={bootProgress} />
+                  <div className="bootScanBeam" style={{ top: `${Math.min(99, bootProgress * 100)}%` }} />
+                </div>
               </div>
-            ))}
+            </div>
+
+            <div className="bootConsole">
+              {bootLines.slice(Math.max(0, bootCount - 8), bootCount).map((line, index) => (
+                <div key={`${line}-${index}`} className={line === "> READY" ? "bootReady" : ""}>
+                  {line}{line === "> READY" && <span className="bootCursor" />}
+                </div>
+              ))}
+            </div>
+
+            <div className="bootFooter">
+              <span>[ SYSTEM BOOT ]</span>
+              <span>[ {Math.round(bootProgress * 100).toString().padStart(3, "0")}% ]</span>
+            </div>
           </div>
         </div>
       )}
