@@ -52,6 +52,63 @@ const projectMeta: Record<string,{status:string;kind:string;url:string;cover:str
   }
 };
 
+const uiTranslations: Record<string,string> = {
+  "Sobre":"About","Serviços":"Services","Portfólio":"Portfolio","Loja":"Store","Vídeos":"Videos","Fale comigo":"Contact","Cartão":"Card",
+  "Soluções digitais sob medida para empresas que precisam integrar operação, software, automação, inteligência artificial e segurança em um único ecossistema.":"Tailored digital solutions for companies that need to connect operations, software, automation, artificial intelligence and security in a single ecosystem.",
+  "Cabo Frio, RJ · Brasil · Sistemas sob medida":"Cabo Frio, RJ · Brazil · Tailored systems",
+  "Iniciar ChatCommerce →":"Start ChatCommerce →",
+  "Entendo problemas, desenho soluções técnicas e transformo complexidade em sistemas que podem ser construídos, operados e evoluídos.":"I understand problems, design technical solutions and turn complexity into systems that can be built, operated and evolved.",
+  "Cabo Frio, RJ · Brasil ·":"Cabo Frio, RJ · Brazil ·",
+  "01 · Posicionamento":"01 · Positioning",
+  "Engenharia para problemas que não cabem em uma stack.":"Engineering for problems that do not fit into a single stack.",
+  "Atuo como Solutions Architect e Software Engineer em cenários que exigem visão de sistema, autonomia técnica e capacidade de atravessar produto, software, infraestrutura, automação, IA e segurança sem tratar nenhuma tecnologia como resposta universal.":"I work as a Solutions Architect and Software Engineer in scenarios that require systems thinking, technical autonomy and the ability to move across product, software, infrastructure, automation, AI and security without treating any technology as a universal answer.",
+  "Visão sistêmica":"Systems thinking",
+  "Leio o cenário inteiro antes de tomar decisão: operação, usuários, dependências, integrações, riscos, custo e impacto no negócio.":"I read the whole scenario before making decisions: operations, users, dependencies, integrations, risks, cost and business impact.",
+  "Decisão técnica":"Technical decision-making",
+  "Escolho arquitetura, stack e abordagem pelo contexto. Não pelo framework da moda, nem por apego a ferramenta.":"I choose architecture, stack and approach based on context, not the framework of the week or attachment to a tool.",
+  "Execução hands-on":"Hands-on execution",
+  "Consigo sair da estratégia e entrar na implementação, validar partes críticas e conduzir a solução até funcionar de verdade.":"I can move from strategy into implementation, validate critical parts and lead the solution until it actually works.",
+  "Evolução profissional":"Professional evolution",
+  "Base técnica":"Technical foundation",
+  "Minha trajetória passou por infraestrutura, desenvolvimento, sistemas, operações digitais e construção de produtos.":"My path has crossed infrastructure, development, systems, digital operations and product building.",
+  "Liderança técnica, consultoria e contato direto com operações ampliaram meu olhar de código para processo, integração, risco e resultado.":"Technical leadership, consulting and direct exposure to operations expanded my view from code to process, integration, risk and outcomes.",
+  "Atuação atual":"Current focus",
+  "Hoje combino arquitetura de soluções e engenharia de software para transformar cenários complexos em soluções que possam ser implementadas, operadas e evoluídas.":"Today I combine solutions architecture and software engineering to turn complex scenarios into solutions that can be implemented, operated and evolved.",
+  "Meu valor não está em dominar uma stack específica. Está em conseguir entender cenários complexos, tomar boas decisões técnicas e transformar essas decisões em sistemas que funcionam.":"My value is not in mastering one specific stack. It is in understanding complex scenarios, making sound technical decisions and turning them into systems that work.",
+  "Arquitetura & Decisão Técnica":"Architecture & Technical Decision-Making",
+  "Estruturo soluções, avalio trade-offs e defino como sistemas, dados, integrações e infraestrutura devem trabalhar juntos.":"I structure solutions, evaluate trade-offs and define how systems, data, integrations and infrastructure should work together.",
+  "Engenharia de Software":"Software Engineering",
+  "Projeto e construo aplicações, plataformas, APIs e sistemas internos preparados para evoluir com a operação.":"I design and build applications, platforms, APIs and internal systems prepared to evolve with the operation.",
+  "Automação & IA":"Automation & AI",
+  "Aplico automação e inteligência artificial onde existe ganho real de eficiência, velocidade ou capacidade operacional.":"I apply automation and artificial intelligence where they create real gains in efficiency, speed or operational capacity.",
+  "Consultoria Técnica":"Technical Consulting",
+  "Diagnóstico cenários, identifico gargalos e ajudo empresas a decidir o que construir, integrar, modernizar ou substituir.":"I diagnose scenarios, identify bottlenecks and help companies decide what to build, integrate, modernize or replace.",
+  "Ver portfólio →":"View portfolio →","Ver sistemas →":"View systems →",
+  "02 · Portfólio":"02 · Portfolio","Produtos, startups e pesquisa aplicada.":"Products, startups and applied research.",
+  "Projetos que mostram como eu penso, construo e valido soluções em contextos diferentes.":"Projects that show how I think, build and validate solutions across different contexts.",
+  "Projetos & Startups":"Projects & Startups","Pesquisa & Engenharia":"Research & Engineering",
+  "ver projeto ↗":"view project ↗","ver estudo ↗":"view research ↗","Sistemas & soluções comerciais →":"Commercial systems & solutions →",
+  "03 · Atuação":"03 · Practice","Onde eu entro e gero valor.":"Where I step in and create value.",
+  "Da decisão técnica à execução, atuo em cenários que exigem arquitetura, engenharia, integração, automação e visão de operação.":"From technical decisions to execution, I work in scenarios that require architecture, engineering, integration, automation and operational awareness.",
+  "Notas de engenharia.":"Engineering notes.","Arquitetura, IA, segurança, software e pesquisa técnica.":"Architecture, AI, security, software and technical research.",
+  "05 · Sistemas & Soluções Comerciais":"05 · Commercial Systems & Solutions",
+  "Tecnologia que se adapta à operação, não o contrário.":"Technology that adapts to the operation, not the other way around.",
+  "A SOPHXY reúne sistemas, automações e soluções que podem ser implantados, personalizados e integrados conforme a realidade de cada negócio.":"SOPHXY brings together systems, automations and solutions that can be deployed, customized and integrated to match each business operation.",
+  "Catálogo em preparação. O ChatCommerce coleta o escopo e encaminha o briefing para análise e precificação.":"Catalog in preparation. ChatCommerce collects the scope and forwards the briefing for analysis and pricing.",
+  "06 · Setup / Afiliados":"06 · Setup / Affiliates","Ferramentas que eu realmente uso.":"Tools I actually use.","Hardware, software e ferramentas do meu fluxo de trabalho.":"Hardware, software and tools from my real workflow.",
+  "07 · Vídeos":"07 · Videos","Conteúdo em construção.":"Content in progress.","Tecnologia, engenharia, IA, segurança e a vida fora da tela.":"Technology, engineering, AI, security and life beyond the screen.",
+  "09 · Cartão digital":"09 · Digital card","Um contato. Todos os caminhos.":"One contact. Every path.","Cabo Frio, RJ · Brasil":"Cabo Frio, RJ · Brazil",
+  "VOCÊ":"YOU","processando":"processing","descreva seu projeto...":"describe your project...",
+  "Sistema empresarial para centralizar clientes, estoque, vendas, PDV, financeiro e automações em uma única operação.":"Business system that centralizes customers, inventory, sales, POS, finance and automations in a single operation.",
+  "Startup SaaS criada para digitalizar e organizar a operação de autoescolas, instrutores e alunos.":"SaaS startup created to digitize and organize the operation of driving schools, instructors and students.",
+  "Startup de tecnologia e impacto ambiental em fase de planejamento do MVP, com monitoramento ambiental, IA e componentes Web3.":"Technology and environmental impact startup in MVP planning, combining environmental monitoring, AI and Web3 components.",
+  "Pesquisa técnica sobre recuperação de contexto, busca híbrida e eficiência em sistemas baseados em LLMs.":"Technical research on context retrieval, hybrid search and efficiency in LLM-based systems.",
+  "Pesquisa e engenharia aplicada a governança de desenvolvimento com agentes, validação, segurança e processos reproduzíveis.":"Research and applied engineering for agent-based development governance, validation, security and reproducible processes.",
+  "EM DESENVOLVIMENTO":"IN DEVELOPMENT","Produto / cliente":"Product / client","PAUSADO · RETOMADA PLANEJADA":"PAUSED · RESUME PLANNED","Startup própria":"Own startup",
+  "PLANEJAMENTO MVP":"MVP PLANNING","Startup / impacto ambiental":"Startup / environmental impact","PESQUISA":"RESEARCH","EM EVOLUÇÃO":"IN EVOLUTION"
+};
+const uiTranslationsReverse: Record<string,string> = Object.fromEntries(Object.entries(uiTranslations).map(([br,en]) => [en,br]));
+
 const bootLines = [
   "> INIT GUILHERME.DEV",
   "loading kernel...",
@@ -132,6 +189,7 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [progress, setProgress] = useState(0);
   const [typeWord, setTypeWord] = useState("Architecture");
+  const [locale, setLocale] = useState<"br" | "en">("br");
 
   const panelIndex = useMemo(() => String(menu.findIndex((item) => item.id === panel) + 1).padStart(2, "0"), [panel]);
 
@@ -174,6 +232,28 @@ export default function Home() {
     const doneTimer = window.setTimeout(() => { setBootVisible(false); setInterfaceReady(true); }, duration + 450);
     return () => { cancelAnimationFrame(raf); window.clearTimeout(exitTimer); window.clearTimeout(doneTimer); };
   }, []);
+
+  useEffect(() => {
+    const map = locale === "en" ? uiTranslations : uiTranslationsReverse;
+    const root = document.querySelector(".siteShell");
+    if (!root) return;
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    const nodes: Text[] = [];
+    let current = walker.nextNode();
+    while (current) {
+      nodes.push(current as Text);
+      current = walker.nextNode();
+    }
+    for (const node of nodes) {
+      const raw = node.nodeValue ?? "";
+      const trimmed = raw.trim();
+      const translated = map[trimmed];
+      if (translated) node.nodeValue = raw.replace(trimmed, translated);
+    }
+    const composer = document.querySelector(".chatComposer textarea") as HTMLTextAreaElement | null;
+    if (composer) composer.placeholder = locale === "en" ? "describe your project..." : "descreva seu projeto...";
+    document.documentElement.lang = locale === "en" ? "en" : "pt-BR";
+  }, [locale, panel, interfaceReady]);
 
   useEffect(() => {
     const onScroll = () => {
@@ -302,7 +382,7 @@ export default function Home() {
               autoFocus={searchOpen} aria-label="Pesquisar no site" />
             <button className="cursorButton" aria-label="Fechar pesquisa" onClick={() => { setSearchOpen(false); setSearchQuery(""); }}><span className="cursor" /></button>
           </div>
-          <span className="locale">BR</span>
+          <button className="locale localeToggle" type="button" onClick={() => setLocale((current) => current === "br" ? "en" : "br")} aria-label={locale === "en" ? "Mudar para português do Brasil" : "Switch to English"}><span className={locale === "br" ? "active" : ""}>BR</span><span>/</span><span className={locale === "en" ? "active" : ""}>EN</span></button>
         </header>
 
         {searchOpen && searchQuery && (
