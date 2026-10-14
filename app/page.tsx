@@ -12,9 +12,9 @@ const menu: { id: Panel; label: string }[] = [
   { id: "servicos", label: "Serviços" },
   { id: "portfolio", label: "Portfólio" },
   { id: "sdr", label: "Fale comigo" },
-  { id: "blog", label: "Blog" },
   { id: "loja", label: "Loja" },
   { id: "setup", label: "Setup" },
+  { id: "blog", label: "Blog" },
   { id: "videos", label: "Vídeos" },
   { id: "cartao", label: "Cartão" },
 ];
