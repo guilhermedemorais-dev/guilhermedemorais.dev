@@ -315,14 +315,14 @@ export default function Home() {
             <button className="cursorButton" aria-label="Abrir pesquisa" onClick={() => setSearchOpen(true)}><span className="cursor" /></button>
           </div>
           <div className={`searchOverlay ${searchOpen ? "open" : ""}`}>
-            <span>&gt;</span>
+            <span>&gt;</span><span className="cursor searchPromptCursor" aria-hidden="true" />
             <input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === "Escape") { setSearchOpen(false); setSearchQuery(""); }
                 if (e.key === "Enter" && searchHits[0]) selectPanel(searchHits[0].panel);
               }}
               autoFocus={searchOpen} aria-label="Pesquisar no site" />
-            <button className="cursorButton" aria-label="Fechar pesquisa" onClick={() => { setSearchOpen(false); setSearchQuery(""); }}><span className="cursor" /></button>
+            <button className="searchClose" aria-label="Fechar pesquisa" onClick={() => { setSearchOpen(false); setSearchQuery(""); }}>×</button>
           </div>
           <button className="locale localeToggle" type="button" onClick={() => setLocale((current) => current === "br" ? "en" : "br")} aria-label={locale === "en" ? "Mudar para português do Brasil" : "Switch to English"}><span className={locale === "br" ? "active" : ""}>BR</span><span>/</span><span className={locale === "en" ? "active" : ""}>EN</span></button>
         </header>
