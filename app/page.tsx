@@ -112,6 +112,11 @@ const uiTranslations: Record<string,string> = {
   "Sistema empresarial para centralizar clientes, estoque, vendas, PDV, financeiro e automações em uma única operação.":"Business system that centralizes customers, inventory, sales, POS, finance and automations in a single operation.",
   "Startup SaaS criada para digitalizar e organizar a operação de autoescolas, instrutores e alunos.":"SaaS startup created to digitize and organize the operation of driving schools, instructors and students.",
   "Startup de tecnologia e impacto ambiental em fase de planejamento do MVP, com monitoramento ambiental, IA e componentes Web3.":"Technology and environmental impact startup in MVP planning, combining environmental monitoring, AI and Web3 components.",
+  "Sistemas construídos para problemas reais.":"Systems built for real problems.",
+  "Atuação atual, produtos e ferramentas de engenharia que existem para resolver operação de verdade, não para preencher card de portfólio.":"Current work, products and engineering tools built to solve real operational problems, not to fill portfolio cards.",
+  "Construção do ERP interno da empresa do zero.":"Building the company's internal ERP from scratch.",
+  "ERP interno · do zero":"Internal ERP · built from scratch",
+  "Plataforma de rastreabilidade e monitoramento ambiental para acompanhar mudas e árvores da origem ao plantio e evolução em campo, com geolocalização, evidências periódicas, mapas e validação ambiental.":"Environmental traceability and monitoring platform that follows seedlings and trees from origin through planting and field growth, with geolocation, periodic evidence, maps and environmental validation.",
   "Pesquisa técnica sobre recuperação de contexto, busca híbrida e eficiência em sistemas baseados em LLMs.":"Technical research on context retrieval, hybrid search and efficiency in LLM-based systems.",
   "Pesquisa e engenharia aplicada a governança de desenvolvimento com agentes, validação, segurança e processos reproduzíveis.":"Research and applied engineering for agent-based development governance, validation, security and reproducible processes.",
   "EM DESENVOLVIMENTO":"IN DEVELOPMENT","Produto / cliente":"Product / client","PAUSADO · RETOMADA PLANEJADA":"PAUSED · RESUME PLANNED","Startup própria":"Own startup",
@@ -457,7 +462,7 @@ export default function Home() {
                         <div className="activityGraph" aria-label="Atividade recente no GitHub">
                           {meta.activity.map((value,index) => <span key={index} className={value > 20 ? "hot" : value > 0 ? "warm" : ""} title={`${value} commits`} />)}
                         </div>
-                        <span>última atividade · {meta.lastActivity}</span>
+                        <span>{locale === "en" ? "last activity" : "última atividade"} · {meta.lastActivity}</span>
                       </div>}
                       <div className="projectLink">ver projeto ↗</div>
                     </a>;
