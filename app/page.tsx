@@ -19,38 +19,48 @@ const menu: { id: Panel; label: string }[] = [
   { id: "cartao", label: "Cartão" },
 ];
 
-const projectMeta: Record<string,{status:string;kind:string;url:string;cover:string}> = {
+const projectMeta: Record<string,{status:string;kind:string;url:string;cover?:string;coverClass?:string;lastActivity?:string;activity?:number[];brand?:string}> = {
   "ORION CRM / ERP": {
     status: "EM DESENVOLVIMENTO",
-    kind: "Produto / cliente",
+    kind: "ERP / operação real",
     url: "https://github.com/guilhermedemorais-dev/ORION-CRM",
-    cover: "https://opengraph.githubassets.com/portfolio-orion/guilhermedemorais-dev/ORION-CRM"
+    cover: "https://raw.githubusercontent.com/guilhermedemorais-dev/ORION-CRM/main/docs/design/references/runtime-2026-06-09/dashboard.png",
+    coverClass: "coverScreenshot",
+    lastActivity: "23 AGO 2026",
+    activity: [18,0,5,5,16,0,0,0,0,0,0,0]
   },
   "HabilitFy": {
     status: "PAUSADO · RETOMADA PLANEJADA",
     kind: "Startup própria",
     url: "https://github.com/guilhermedemorais-dev/Habilitfy",
-    cover: "https://opengraph.githubassets.com/portfolio-habilitfy/guilhermedemorais-dev/Habilitfy"
-  },
-  "PIRCSEEK": {
-    status: "PESQUISA",
-    kind: "Research",
-    url: "https://github.com/guilhermedemorais-dev/PIRCSEEK",
-    cover: "https://opengraph.githubassets.com/portfolio-pircseek/guilhermedemorais-dev/PIRCSEEK"
+    cover: "https://raw.githubusercontent.com/guilhermedemorais-dev/Habilitfy/main/logo%20e%20cores/Logo%20Principal/Branco/Logo%20Principal%20Branco.svg",
+    coverClass: "coverLogo",
+    lastActivity: "10 JUN 2026",
+    activity: [0,0,0,0,0,0,0,0,0,0,0,0]
   },
   "Engineering Harness": {
     status: "EM EVOLUÇÃO",
-    kind: "Developer tooling",
+    kind: "Engineering tooling",
     url: "https://github.com/guilhermedemorais-dev/Dev-workflow",
-    cover: "https://opengraph.githubassets.com/portfolio-harness/guilhermedemorais-dev/Dev-workflow"
+    cover: "https://raw.githubusercontent.com/guilhermedemorais-dev/Dev-workflow/main/plugins/parceiro-estrategico-global/skills/parceiro-estrategico-global/assets/icon.svg",
+    coverClass: "coverIcon",
+    lastActivity: "14 OUT 2026",
+    activity: [0,0,0,0,0,0,0,0,0,0,73,27]
   },
   "Salve o Pau Brasil": {
     status: "PLANEJAMENTO MVP",
     kind: "Startup / impacto ambiental",
     url: "https://github.com/guilhermedemorais-dev/paubrasil-",
-    cover: "https://opengraph.githubassets.com/portfolio-paubrasil/guilhermedemorais-dev/paubrasil-"
+    brand: "SALVE O PAU BRASIL",
+    lastActivity: "01 JUL 2026",
+    activity: [0,0,0,0,0,0,0,0,0,0,0,0]
   }
 };
+
+const currentWork = [
+  { company: "Trafegantes", role: "Solutions Engineer", detail: "Construção do ERP interno da empresa do zero.", monogram: "TR" },
+  { company: "Gaeva 3D", role: "Solutions Engineer", detail: "Construção do ERP interno da empresa do zero.", monogram: "G3" },
+] as const;
 
 const uiTranslations: Record<string,string> = {
   "Sobre":"About","Serviços":"Services","Portfólio":"Portfolio","Loja":"Store","Vídeos":"Videos","Fale comigo":"Contact","Cartão":"Card",
@@ -413,29 +423,65 @@ export default function Home() {
             {panel === "portfolio" && (
               <div className="panel enter">
                 <div className="eyebrow">02 · Portfólio</div>
-                <h2>Produtos, startups e pesquisa aplicada.</h2>
-                <p className="lead">Projetos que mostram como eu penso, construo e valido soluções em contextos diferentes.</p>
+                <h2>Sistemas construídos para problemas reais.</h2>
+                <p className="lead">Atuação atual, produtos e ferramentas de engenharia que existem para resolver operação de verdade, não para preencher card de portfólio.</p>
 
-                <div className="sectionLabel">Projetos & Startups</div>
+                <div className="sectionLabel">Atuação atual</div>
+                <div className="projectGrid currentWorkGrid">
+                  {currentWork.map((item) => (
+                    <article className="projectCard workCard" key={item.company}>
+                      <div className="projectCover workCover">
+                        <span className="workMonogram">{item.monogram}</span>
+                        <strong>{item.company}</strong>
+                      </div>
+                      <div className="projectMeta"><span>ATUAÇÃO ATUAL</span><span>{item.role}</span></div>
+                      <h3>{item.company}</h3>
+                      <p>{item.detail}</p>
+                      <div className="projectLink mutedLink">ERP interno · do zero</div>
+                    </article>
+                  ))}
+                </div>
+
+                <div className="sectionLabel caseLabel">Projetos & Startups</div>
                 <div className="projectGrid">
                   {featuredProjects.map((item) => {
                     const meta=projectMeta[item.title];
                     return <a className="projectCard" key={item.title} href={meta?.url || "#"} target="_blank" rel="noreferrer">
-                      <div className="projectCover">{meta?.cover ? <img src={meta.cover} alt="" /> : <span>{item.tag}</span>}</div>
+                      <div className={`projectCover ${meta?.coverClass || "coverBrand"}`}>
+                        {meta?.cover ? <img src={meta.cover} alt={`Identidade visual de ${item.title}`} /> : <span className="brandFallback">{meta?.brand || item.title}</span>}
+                      </div>
                       <div className="projectMeta"><span>{meta?.status || "PROJETO"}</span><span>{meta?.kind || item.tag}</span></div>
-                      <h3>{item.title}</h3><p>{item.description}</p><div className="projectLink">ver projeto ↗</div>
+                      <h3>{item.title}</h3>
+                      <p>{item.description}</p>
+                      {meta?.activity && <div className="activityRow">
+                        <div className="activityGraph" aria-label="Atividade recente no GitHub">
+                          {meta.activity.map((value,index) => <span key={index} className={value > 20 ? "hot" : value > 0 ? "warm" : ""} title={`${value} commits`} />)}
+                        </div>
+                        <span>última atividade · {meta.lastActivity}</span>
+                      </div>}
+                      <div className="projectLink">ver projeto ↗</div>
                     </a>;
                   })}
                 </div>
 
-                <div className="sectionLabel caseLabel">Pesquisa & Engenharia</div>
+                <div className="sectionLabel caseLabel">Engineering Tools</div>
                 <div className="projectGrid">
                   {caseStudies.map((item) => {
                     const meta=projectMeta[item.title];
                     return <a className="projectCard" key={item.title} href={meta?.url || "#"} target="_blank" rel="noreferrer">
-                      <div className="projectCover">{meta?.cover ? <img src={meta.cover} alt="" /> : <span>{item.tag}</span>}</div>
-                      <div className="projectMeta"><span>{meta?.status || "CASE"}</span><span>{meta?.kind || item.tag}</span></div>
-                      <h3>{item.title}</h3><p>{item.description}</p><div className="projectLink">ver estudo ↗</div>
+                      <div className={`projectCover ${meta?.coverClass || "coverBrand"}`}>
+                        {meta?.cover ? <img src={meta.cover} alt={`Identidade visual de ${item.title}`} /> : <span className="brandFallback">{meta?.brand || item.title}</span>}
+                      </div>
+                      <div className="projectMeta"><span>{meta?.status || "PROJETO"}</span><span>{meta?.kind || item.tag}</span></div>
+                      <h3>{item.title}</h3>
+                      <p>{item.description}</p>
+                      {meta?.activity && <div className="activityRow">
+                        <div className="activityGraph" aria-label="Atividade recente no GitHub">
+                          {meta.activity.map((value,index) => <span key={index} className={value > 20 ? "hot" : value > 0 ? "warm" : ""} title={`${value} commits`} />)}
+                        </div>
+                        <span>última atividade · {meta.lastActivity}</span>
+                      </div>}
+                      <div className="projectLink">ver projeto ↗</div>
                     </a>;
                   })}
                 </div>
