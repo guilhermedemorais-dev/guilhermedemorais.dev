@@ -13,19 +13,13 @@ export const featuredProjects = [
   },
   {
     title: "Salve o Pau Brasil",
-    description: "Startup de tecnologia e impacto ambiental em fase de planejamento do MVP, com monitoramento ambiental, IA e componentes Web3.",
-    descriptionEn: "Technology and environmental impact startup in MVP planning, combining environmental monitoring, AI and Web3 components.",
-    tag: "R&D",
+    description: "Plataforma de rastreabilidade e monitoramento ambiental para acompanhar mudas e árvores da origem ao plantio e evolução em campo, com geolocalização, evidências periódicas, mapas e validação ambiental.",
+    descriptionEn: "Environmental traceability and monitoring platform that follows seedlings and trees from origin through planting and field growth, with geolocation, periodic evidence, maps and environmental validation.",
+    tag: "ENV",
   },
 ] as const;
 
 export const caseStudies = [
-  {
-    title: "PIRCSEEK",
-    description: "Pesquisa técnica sobre recuperação de contexto, busca híbrida e eficiência em sistemas baseados em LLMs.",
-    descriptionEn: "Technical research on context retrieval, hybrid search and efficiency in LLM-based systems.",
-    tag: "AI",
-  },
   {
     title: "Engineering Harness",
     description: "Pesquisa e engenharia aplicada a governança de desenvolvimento com agentes, validação, segurança e processos reproduzíveis.",
