@@ -51,15 +51,16 @@ const projectMeta: Record<string,{status:string;kind:string;url:string;cover?:st
     status: "PLANEJAMENTO MVP",
     kind: "Startup / impacto ambiental",
     url: "https://github.com/guilhermedemorais-dev/paubrasil-",
-    brand: "SALVE O PAU BRASIL",
+    cover: "/brands/salve-pau-brasil.svg",
+    coverClass: "coverProjectLogo coverSpb",
     lastActivity: "01 JUL 2026",
     activity: [0,0,0,0,0,0,0,0,0,0,0,0]
   }
 };
 
 const currentWork = [
-  { company: "Trafegantes", role: "Solutions Engineer", detail: "Construção do ERP interno da empresa do zero.", monogram: "TR" },
-  { company: "Gaeva 3D", role: "Solutions Engineer", detail: "Construção do ERP interno da empresa do zero.", monogram: "G3" },
+  { company: "Trafegantes", role: "Solutions Engineer", detail: "Construção do ERP interno da empresa do zero.", logo: "/brands/trafegantes.svg" },
+  { company: "Gaeva 3D", role: "Solutions Engineer", detail: "Construção do ERP interno da empresa do zero.", logo: "/brands/gaeva.svg" },
 ] as const;
 
 const uiTranslations: Record<string,string> = {
@@ -436,8 +437,7 @@ export default function Home() {
                   {currentWork.map((item) => (
                     <article className="projectCard workCard" key={item.company}>
                       <div className="projectCover workCover">
-                        <span className="workMonogram">{item.monogram}</span>
-                        <strong>{item.company}</strong>
+                        <img src={item.logo} alt={`Logo ${item.company}`} />
                       </div>
                       <div className="projectMeta"><span>ATUAÇÃO ATUAL</span><span>{item.role}</span></div>
                       <h3>{item.company}</h3>
