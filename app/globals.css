@@ -79,3 +79,26 @@ a{color:inherit;text-decoration:none}
 @media(min-width:701px){.companyAvatar{width:112px;height:112px;margin:0 auto 16px;font-size:42px}.companyActions{justify-content:center}}
 
 .searchPromptCursor{flex:0 0 auto;margin-right:1px}.searchClose{appearance:none;border:0;background:transparent;color:#777;padding:0 2px;font-size:18px;line-height:1;cursor:pointer}.searchClose:hover{color:#fff}.localeToggle{appearance:none;border:0;background:transparent;padding:0;display:inline-flex;align-items:center;gap:2px;cursor:pointer}.localeToggle .active{color:#fff}
+
+/* Portfolio proof cards */
+.projectCover{position:relative;isolation:isolate}
+.coverScreenshot{background:#0a0a0a}
+.coverScreenshot img{width:100%;height:100%;object-fit:cover;object-position:center top;filter:grayscale(.2) contrast(1.02)}
+.projectCard:hover .coverScreenshot img{filter:grayscale(0) contrast(1.04)}
+.coverLogo,.coverIcon,.coverBrand,.workCover{background:radial-gradient(circle at 50% 35%,#161616 0,#080808 48%,#020202 100%)}
+.coverLogo img{width:min(72%,360px);height:auto;max-height:62%;object-fit:contain;filter:none}
+.coverIcon img{width:68px;height:68px;object-fit:contain;filter:none}
+.brandFallback{font-size:clamp(16px,3vw,28px);font-weight:800;letter-spacing:.08em;color:#f2f2f2;text-align:center;padding:20px}
+.currentWorkGrid{margin-bottom:8px}
+.workCard{cursor:default}
+.workCard:hover{transform:translateY(-2px)}
+.workCover{display:flex;flex-direction:column;gap:9px;align-items:center;justify-content:center}
+.workCover strong{font-size:clamp(17px,2.6vw,26px);letter-spacing:.08em}
+.workMonogram{width:48px;height:48px;border:1px solid #4a4a4a;border-radius:12px;display:grid;place-items:center;font-size:13px;font-weight:800;letter-spacing:.08em;color:#ddd;background:#090909}
+.mutedLink{color:#6e6e6e}
+.activityRow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 14px 0;color:#666;font-size:8px;text-transform:uppercase;letter-spacing:.06em}
+.activityGraph{display:grid;grid-template-columns:repeat(12,6px);gap:3px;flex:0 0 auto}
+.activityGraph span{width:6px;height:6px;border-radius:2px;background:#171717;border:1px solid #252525}
+.activityGraph span.warm{background:#1f6f43;border-color:#2b8b56}
+.activityGraph span.hot{background:#35b96d;border-color:#44d17d}
+@media(max-width:560px){.activityRow{align-items:flex-start;flex-direction:column}.activityGraph{grid-template-columns:repeat(12,5px)}.activityGraph span{width:5px;height:5px}}
