@@ -501,7 +501,19 @@ export default function Home() {
                 <div className="grid2">{services.map(([title,description])=><article className="lineCard" key={title}><h3>{title}</h3><p>{description}</p></article>)}</div>
               </div>
             )}
-            {panel === "blog" && <SimplePanel eyebrow="04 · Blog" title="Notas de engenharia." text="Arquitetura, IA, segurança, software e pesquisa técnica." />}
+            {panel === "blog" && (
+              <div className="panel enter">
+                <div className="eyebrow">04 · Blog / Security Notes</div>
+                <h2>Notas de engenharia.</h2>
+                <p className="lead">Arquitetura, inteligência artificial, segurança e software. Estudos técnicos e reflexões de quem constrói sistemas.</p>
+                <a className="projectCard" href="/blog" style={{display:"block",maxWidth:720}}>
+                  <div className="projectMeta"><span>03 NOV 2026 · CIBERSEGURANÇA</span><span>CVE-2026-120459</span></div>
+                  <h3>Seu login pode parecer seguro. Mas uma chave vazia muda tudo.</h3>
+                  <p>Uma falha crítica no python-jose e os riscos de colocar código gerado por IA em produção sem revisão de segurança.</p>
+                  <div className="projectLink">Ler artigo completo →</div>
+                </a>
+              </div>
+            )}
 
             {panel === "loja" && (
               <div className="panel enter">
